@@ -18,6 +18,8 @@ import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as MembershipRouteImport } from './routes/membership'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as TrainersRouteImport } from './routes/trainers'
+import { Route as JoinIndexRouteImport } from './routes/join.index'
+import { Route as JoinMemberRouteImport } from './routes/join.member'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -64,6 +66,16 @@ const TrainersRoute = TrainersRouteImport.update({
   path: '/trainers',
   getParentRoute: () => rootRouteImport,
 } as any)
+const JoinIndexRoute = JoinIndexRouteImport.update({
+  id: '/join/',
+  path: '/join/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JoinMemberRoute = JoinMemberRouteImport.update({
+  id: '/join/member',
+  path: '/join/member',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -75,6 +87,8 @@ export interface FileRoutesByFullPath {
   '/membership': typeof MembershipRoute
   '/reset-password': typeof ResetPasswordRoute
   '/trainers': typeof TrainersRoute
+  '/join/member': typeof JoinMemberRoute
+  '/join/': typeof JoinIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -86,6 +100,8 @@ export interface FileRoutesByTo {
   '/membership': typeof MembershipRoute
   '/reset-password': typeof ResetPasswordRoute
   '/trainers': typeof TrainersRoute
+  '/join/member': typeof JoinMemberRoute
+  '/join': typeof JoinIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,6 +114,8 @@ export interface FileRoutesById {
   '/membership': typeof MembershipRoute
   '/reset-password': typeof ResetPasswordRoute
   '/trainers': typeof TrainersRoute
+  '/join/member': typeof JoinMemberRoute
+  '/join/': typeof JoinIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +129,8 @@ export interface FileRouteTypes {
     | '/membership'
     | '/reset-password'
     | '/trainers'
+    | '/join/member'
+    | '/join/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +142,8 @@ export interface FileRouteTypes {
     | '/membership'
     | '/reset-password'
     | '/trainers'
+    | '/join/member'
+    | '/join'
   id:
     | '__root__'
     | '/'
@@ -133,6 +155,8 @@ export interface FileRouteTypes {
     | '/membership'
     | '/reset-password'
     | '/trainers'
+    | '/join/member'
+    | '/join/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -145,6 +169,8 @@ export interface RootRouteChildren {
   MembershipRoute: typeof MembershipRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   TrainersRoute: typeof TrainersRoute
+  JoinMemberRoute: typeof JoinMemberRoute
+  JoinIndexRoute: typeof JoinIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -212,6 +238,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrainersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/join/': {
+      id: '/join/'
+      path: '/join'
+      fullPath: '/join/'
+      preLoaderRoute: typeof JoinIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/join/member': {
+      id: '/join/member'
+      path: '/join/member'
+      fullPath: '/join/member'
+      preLoaderRoute: typeof JoinMemberRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -225,6 +265,8 @@ const rootRouteChildren: RootRouteChildren = {
   MembershipRoute: MembershipRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   TrainersRoute: TrainersRoute,
+  JoinMemberRoute: JoinMemberRoute,
+  JoinIndexRoute: JoinIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
