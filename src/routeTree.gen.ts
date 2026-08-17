@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ClassesRouteImport } from './routes/classes'
@@ -17,13 +18,22 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as MembershipRouteImport } from './routes/membership'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as StatusRouteImport } from './routes/status'
 import { Route as TrainersRouteImport } from './routes/trainers'
+import { Route as AuthenticatedMemberRouteImport } from './routes/_authenticated/member'
+import { Route as AuthenticatedTrainerRouteImport } from './routes/_authenticated/trainer'
 import { Route as JoinIndexRouteImport } from './routes/join.index'
 import { Route as JoinMemberRouteImport } from './routes/join.member'
+import { Route as JoinTrainerRouteImport } from './routes/join.trainer'
+import { Route as AuthenticatedAdminApprovalsRouteImport } from './routes/_authenticated/admin.approvals'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -61,10 +71,25 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
   path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StatusRoute = StatusRouteImport.update({
+  id: '/status',
+  path: '/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TrainersRoute = TrainersRouteImport.update({
   id: '/trainers',
   path: '/trainers',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedMemberRoute = AuthenticatedMemberRouteImport.update({
+  id: '/member',
+  path: '/member',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTrainerRoute = AuthenticatedTrainerRouteImport.update({
+  id: '/trainer',
+  path: '/trainer',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const JoinIndexRoute = JoinIndexRouteImport.update({
   id: '/join/',
@@ -76,6 +101,17 @@ const JoinMemberRoute = JoinMemberRouteImport.update({
   path: '/join/member',
   getParentRoute: () => rootRouteImport,
 } as any)
+const JoinTrainerRoute = JoinTrainerRouteImport.update({
+  id: '/join/trainer',
+  path: '/join/trainer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAdminApprovalsRoute =
+  AuthenticatedAdminApprovalsRouteImport.update({
+    id: '/admin/approvals',
+    path: '/admin/approvals',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -86,9 +122,14 @@ export interface FileRoutesByFullPath {
   '/forgot-password': typeof ForgotPasswordRoute
   '/membership': typeof MembershipRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/status': typeof StatusRoute
   '/trainers': typeof TrainersRoute
+  '/member': typeof AuthenticatedMemberRoute
+  '/trainer': typeof AuthenticatedTrainerRoute
   '/join/member': typeof JoinMemberRoute
+  '/join/trainer': typeof JoinTrainerRoute
   '/join/': typeof JoinIndexRoute
+  '/admin/approvals': typeof AuthenticatedAdminApprovalsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -99,13 +140,19 @@ export interface FileRoutesByTo {
   '/forgot-password': typeof ForgotPasswordRoute
   '/membership': typeof MembershipRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/status': typeof StatusRoute
   '/trainers': typeof TrainersRoute
+  '/member': typeof AuthenticatedMemberRoute
+  '/trainer': typeof AuthenticatedTrainerRoute
   '/join/member': typeof JoinMemberRoute
+  '/join/trainer': typeof JoinTrainerRoute
   '/join': typeof JoinIndexRoute
+  '/admin/approvals': typeof AuthenticatedAdminApprovalsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
   '/classes': typeof ClassesRoute
@@ -113,9 +160,14 @@ export interface FileRoutesById {
   '/forgot-password': typeof ForgotPasswordRoute
   '/membership': typeof MembershipRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/status': typeof StatusRoute
   '/trainers': typeof TrainersRoute
+  '/_authenticated/member': typeof AuthenticatedMemberRoute
+  '/_authenticated/trainer': typeof AuthenticatedTrainerRoute
   '/join/member': typeof JoinMemberRoute
+  '/join/trainer': typeof JoinTrainerRoute
   '/join/': typeof JoinIndexRoute
+  '/_authenticated/admin/approvals': typeof AuthenticatedAdminApprovalsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -128,9 +180,14 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/membership'
     | '/reset-password'
+    | '/status'
     | '/trainers'
+    | '/member'
+    | '/trainer'
     | '/join/member'
+    | '/join/trainer'
     | '/join/'
+    | '/admin/approvals'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -141,12 +198,18 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/membership'
     | '/reset-password'
+    | '/status'
     | '/trainers'
+    | '/member'
+    | '/trainer'
     | '/join/member'
+    | '/join/trainer'
     | '/join'
+    | '/admin/approvals'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/about'
     | '/auth'
     | '/classes'
@@ -154,13 +217,19 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/membership'
     | '/reset-password'
+    | '/status'
     | '/trainers'
+    | '/_authenticated/member'
+    | '/_authenticated/trainer'
     | '/join/member'
+    | '/join/trainer'
     | '/join/'
+    | '/_authenticated/admin/approvals'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   AuthRoute: typeof AuthRoute
   ClassesRoute: typeof ClassesRoute
@@ -168,8 +237,10 @@ export interface RootRouteChildren {
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   MembershipRoute: typeof MembershipRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  StatusRoute: typeof StatusRoute
   TrainersRoute: typeof TrainersRoute
   JoinMemberRoute: typeof JoinMemberRoute
+  JoinTrainerRoute: typeof JoinTrainerRoute
   JoinIndexRoute: typeof JoinIndexRoute
 }
 
@@ -180,6 +251,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -231,12 +309,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/status': {
+      id: '/status'
+      path: '/status'
+      fullPath: '/status'
+      preLoaderRoute: typeof StatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/trainers': {
       id: '/trainers'
       path: '/trainers'
       fullPath: '/trainers'
       preLoaderRoute: typeof TrainersRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/member': {
+      id: '/_authenticated/member'
+      path: '/member'
+      fullPath: '/member'
+      preLoaderRoute: typeof AuthenticatedMemberRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/trainer': {
+      id: '/_authenticated/trainer'
+      path: '/trainer'
+      fullPath: '/trainer'
+      preLoaderRoute: typeof AuthenticatedTrainerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/join/': {
       id: '/join/'
@@ -252,11 +351,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JoinMemberRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/join/trainer': {
+      id: '/join/trainer'
+      path: '/join/trainer'
+      fullPath: '/join/trainer'
+      preLoaderRoute: typeof JoinTrainerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/admin/approvals': {
+      id: '/_authenticated/admin/approvals'
+      path: '/admin/approvals'
+      fullPath: '/admin/approvals'
+      preLoaderRoute: typeof AuthenticatedAdminApprovalsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedMemberRoute: typeof AuthenticatedMemberRoute
+  AuthenticatedTrainerRoute: typeof AuthenticatedTrainerRoute
+  AuthenticatedAdminApprovalsRoute: typeof AuthenticatedAdminApprovalsRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedMemberRoute: AuthenticatedMemberRoute,
+  AuthenticatedTrainerRoute: AuthenticatedTrainerRoute,
+  AuthenticatedAdminApprovalsRoute: AuthenticatedAdminApprovalsRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   AuthRoute: AuthRoute,
   ClassesRoute: ClassesRoute,
@@ -264,8 +393,10 @@ const rootRouteChildren: RootRouteChildren = {
   ForgotPasswordRoute: ForgotPasswordRoute,
   MembershipRoute: MembershipRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  StatusRoute: StatusRoute,
   TrainersRoute: TrainersRoute,
   JoinMemberRoute: JoinMemberRoute,
+  JoinTrainerRoute: JoinTrainerRoute,
   JoinIndexRoute: JoinIndexRoute,
 }
 export const routeTree = rootRouteImport
