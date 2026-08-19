@@ -11,7 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 import { useAccount, type AccountStatus, type Profile } from "@/lib/auth";
 
-export const Route = createFileRoute("/_authenticated/admin/approvals")({
+export const Route = createFileRoute("/_adminportal/admin/approvals")({
   head: () => ({
     meta: [
       { title: "Approval Console — VYBE Fitness Admin" },

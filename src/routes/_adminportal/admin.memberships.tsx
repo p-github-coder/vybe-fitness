@@ -15,7 +15,7 @@ import {
 } from "@/lib/gym-data";
 import { formatPrice } from "@/lib/site-data";
 
-export const Route = createFileRoute("/_authenticated/admin/memberships")({
+export const Route = createFileRoute("/_adminportal/admin/memberships")({
   head: head("Memberships", "Create membership plans and track member subscriptions."),
   component: MembershipsPage,
 });

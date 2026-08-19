@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminportalRouteRouteImport } from './routes/_adminportal/route'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -21,22 +22,23 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as StatusRouteImport } from './routes/status'
 import { Route as TrainersRouteImport } from './routes/trainers'
 import { Route as AuthenticatedMemberRouteImport } from './routes/_authenticated/member'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as JoinIndexRouteImport } from './routes/join.index'
 import { Route as JoinMemberRouteImport } from './routes/join.member'
 import { Route as JoinTrainerRouteImport } from './routes/join.trainer'
-import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
-import { Route as AuthenticatedAdminAiRouteImport } from './routes/_authenticated/admin.ai'
-import { Route as AuthenticatedAdminAnalyticsRouteImport } from './routes/_authenticated/admin.analytics'
-import { Route as AuthenticatedAdminApprovalsRouteImport } from './routes/_authenticated/admin.approvals'
-import { Route as AuthenticatedAdminBookingsRouteImport } from './routes/_authenticated/admin.bookings'
-import { Route as AuthenticatedAdminClassesRouteImport } from './routes/_authenticated/admin.classes'
-import { Route as AuthenticatedAdminContentRouteImport } from './routes/_authenticated/admin.content'
-import { Route as AuthenticatedAdminEquipmentRouteImport } from './routes/_authenticated/admin.equipment'
-import { Route as AuthenticatedAdminExercisesRouteImport } from './routes/_authenticated/admin.exercises'
-import { Route as AuthenticatedAdminMembersRouteImport } from './routes/_authenticated/admin.members'
-import { Route as AuthenticatedAdminMembershipsRouteImport } from './routes/_authenticated/admin.memberships'
-import { Route as AuthenticatedAdminSettingsRouteImport } from './routes/_authenticated/admin.settings'
-import { Route as AuthenticatedAdminTrainersRouteImport } from './routes/_authenticated/admin.trainers'
+import { Route as AdminportalAdminIndexRouteImport } from './routes/_adminportal/admin.index'
+import { Route as AdminportalAdminAiRouteImport } from './routes/_adminportal/admin.ai'
+import { Route as AdminportalAdminAnalyticsRouteImport } from './routes/_adminportal/admin.analytics'
+import { Route as AdminportalAdminApprovalsRouteImport } from './routes/_adminportal/admin.approvals'
+import { Route as AdminportalAdminBookingsRouteImport } from './routes/_adminportal/admin.bookings'
+import { Route as AdminportalAdminClassesRouteImport } from './routes/_adminportal/admin.classes'
+import { Route as AdminportalAdminContentRouteImport } from './routes/_adminportal/admin.content'
+import { Route as AdminportalAdminEquipmentRouteImport } from './routes/_adminportal/admin.equipment'
+import { Route as AdminportalAdminExercisesRouteImport } from './routes/_adminportal/admin.exercises'
+import { Route as AdminportalAdminMembersRouteImport } from './routes/_adminportal/admin.members'
+import { Route as AdminportalAdminMembershipsRouteImport } from './routes/_adminportal/admin.memberships'
+import { Route as AdminportalAdminSettingsRouteImport } from './routes/_adminportal/admin.settings'
+import { Route as AdminportalAdminTrainersRouteImport } from './routes/_adminportal/admin.trainers'
 import { Route as AuthenticatedTrainerIndexRouteImport } from './routes/_authenticated/trainer.index'
 import { Route as AuthenticatedTrainerAttendanceRouteImport } from './routes/_authenticated/trainer.attendance'
 import { Route as AuthenticatedTrainerClassesRouteImport } from './routes/_authenticated/trainer.classes'
@@ -48,6 +50,10 @@ import { Route as AuthenticatedTrainerProfileRouteImport } from './routes/_authe
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminportalRouteRoute = AdminportalRouteRouteImport.update({
+  id: '/_adminportal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
@@ -104,6 +110,11 @@ const AuthenticatedMemberRoute = AuthenticatedMemberRouteImport.update({
   path: '/member',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const JoinIndexRoute = JoinIndexRouteImport.update({
   id: '/join/',
   path: '/join/',
@@ -119,81 +130,78 @@ const JoinTrainerRoute = JoinTrainerRouteImport.update({
   path: '/join/trainer',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+const AdminportalAdminIndexRoute = AdminportalAdminIndexRouteImport.update({
   id: '/admin/',
   path: '/admin/',
-  getParentRoute: () => AuthenticatedRouteRoute,
+  getParentRoute: () => AdminportalRouteRoute,
 } as any)
-const AuthenticatedAdminAiRoute = AuthenticatedAdminAiRouteImport.update({
+const AdminportalAdminAiRoute = AdminportalAdminAiRouteImport.update({
   id: '/admin/ai',
   path: '/admin/ai',
-  getParentRoute: () => AuthenticatedRouteRoute,
+  getParentRoute: () => AdminportalRouteRoute,
 } as any)
-const AuthenticatedAdminAnalyticsRoute =
-  AuthenticatedAdminAnalyticsRouteImport.update({
+const AdminportalAdminAnalyticsRoute =
+  AdminportalAdminAnalyticsRouteImport.update({
     id: '/admin/analytics',
     path: '/admin/analytics',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    getParentRoute: () => AdminportalRouteRoute,
   } as any)
-const AuthenticatedAdminApprovalsRoute =
-  AuthenticatedAdminApprovalsRouteImport.update({
+const AdminportalAdminApprovalsRoute =
+  AdminportalAdminApprovalsRouteImport.update({
     id: '/admin/approvals',
     path: '/admin/approvals',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    getParentRoute: () => AdminportalRouteRoute,
   } as any)
-const AuthenticatedAdminBookingsRoute =
-  AuthenticatedAdminBookingsRouteImport.update({
+const AdminportalAdminBookingsRoute =
+  AdminportalAdminBookingsRouteImport.update({
     id: '/admin/bookings',
     path: '/admin/bookings',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    getParentRoute: () => AdminportalRouteRoute,
   } as any)
-const AuthenticatedAdminClassesRoute =
-  AuthenticatedAdminClassesRouteImport.update({
-    id: '/admin/classes',
-    path: '/admin/classes',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedAdminContentRoute =
-  AuthenticatedAdminContentRouteImport.update({
-    id: '/admin/content',
-    path: '/admin/content',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedAdminEquipmentRoute =
-  AuthenticatedAdminEquipmentRouteImport.update({
+const AdminportalAdminClassesRoute = AdminportalAdminClassesRouteImport.update({
+  id: '/admin/classes',
+  path: '/admin/classes',
+  getParentRoute: () => AdminportalRouteRoute,
+} as any)
+const AdminportalAdminContentRoute = AdminportalAdminContentRouteImport.update({
+  id: '/admin/content',
+  path: '/admin/content',
+  getParentRoute: () => AdminportalRouteRoute,
+} as any)
+const AdminportalAdminEquipmentRoute =
+  AdminportalAdminEquipmentRouteImport.update({
     id: '/admin/equipment',
     path: '/admin/equipment',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    getParentRoute: () => AdminportalRouteRoute,
   } as any)
-const AuthenticatedAdminExercisesRoute =
-  AuthenticatedAdminExercisesRouteImport.update({
+const AdminportalAdminExercisesRoute =
+  AdminportalAdminExercisesRouteImport.update({
     id: '/admin/exercises',
     path: '/admin/exercises',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    getParentRoute: () => AdminportalRouteRoute,
   } as any)
-const AuthenticatedAdminMembersRoute =
-  AuthenticatedAdminMembersRouteImport.update({
-    id: '/admin/members',
-    path: '/admin/members',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedAdminMembershipsRoute =
-  AuthenticatedAdminMembershipsRouteImport.update({
+const AdminportalAdminMembersRoute = AdminportalAdminMembersRouteImport.update({
+  id: '/admin/members',
+  path: '/admin/members',
+  getParentRoute: () => AdminportalRouteRoute,
+} as any)
+const AdminportalAdminMembershipsRoute =
+  AdminportalAdminMembershipsRouteImport.update({
     id: '/admin/memberships',
     path: '/admin/memberships',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    getParentRoute: () => AdminportalRouteRoute,
   } as any)
-const AuthenticatedAdminSettingsRoute =
-  AuthenticatedAdminSettingsRouteImport.update({
+const AdminportalAdminSettingsRoute =
+  AdminportalAdminSettingsRouteImport.update({
     id: '/admin/settings',
     path: '/admin/settings',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    getParentRoute: () => AdminportalRouteRoute,
   } as any)
-const AuthenticatedAdminTrainersRoute =
-  AuthenticatedAdminTrainersRouteImport.update({
+const AdminportalAdminTrainersRoute =
+  AdminportalAdminTrainersRouteImport.update({
     id: '/admin/trainers',
     path: '/admin/trainers',
-    getParentRoute: () => AuthenticatedRouteRoute,
+    getParentRoute: () => AdminportalRouteRoute,
   } as any)
 const AuthenticatedTrainerIndexRoute =
   AuthenticatedTrainerIndexRouteImport.update({
@@ -250,28 +258,29 @@ export interface FileRoutesByFullPath {
   '/status': typeof StatusRoute
   '/trainers': typeof TrainersRoute
   '/member': typeof AuthenticatedMemberRoute
+  '/admin/login': typeof AdminLoginRoute
   '/join/member': typeof JoinMemberRoute
   '/join/trainer': typeof JoinTrainerRoute
   '/join/': typeof JoinIndexRoute
-  '/admin/ai': typeof AuthenticatedAdminAiRoute
-  '/admin/analytics': typeof AuthenticatedAdminAnalyticsRoute
-  '/admin/approvals': typeof AuthenticatedAdminApprovalsRoute
-  '/admin/bookings': typeof AuthenticatedAdminBookingsRoute
-  '/admin/classes': typeof AuthenticatedAdminClassesRoute
-  '/admin/content': typeof AuthenticatedAdminContentRoute
-  '/admin/equipment': typeof AuthenticatedAdminEquipmentRoute
-  '/admin/exercises': typeof AuthenticatedAdminExercisesRoute
-  '/admin/members': typeof AuthenticatedAdminMembersRoute
-  '/admin/memberships': typeof AuthenticatedAdminMembershipsRoute
-  '/admin/settings': typeof AuthenticatedAdminSettingsRoute
-  '/admin/trainers': typeof AuthenticatedAdminTrainersRoute
+  '/admin/ai': typeof AdminportalAdminAiRoute
+  '/admin/analytics': typeof AdminportalAdminAnalyticsRoute
+  '/admin/approvals': typeof AdminportalAdminApprovalsRoute
+  '/admin/bookings': typeof AdminportalAdminBookingsRoute
+  '/admin/classes': typeof AdminportalAdminClassesRoute
+  '/admin/content': typeof AdminportalAdminContentRoute
+  '/admin/equipment': typeof AdminportalAdminEquipmentRoute
+  '/admin/exercises': typeof AdminportalAdminExercisesRoute
+  '/admin/members': typeof AdminportalAdminMembersRoute
+  '/admin/memberships': typeof AdminportalAdminMembershipsRoute
+  '/admin/settings': typeof AdminportalAdminSettingsRoute
+  '/admin/trainers': typeof AdminportalAdminTrainersRoute
   '/trainer/attendance': typeof AuthenticatedTrainerAttendanceRoute
   '/trainer/classes': typeof AuthenticatedTrainerClassesRoute
   '/trainer/members': typeof AuthenticatedTrainerMembersRoute
   '/trainer/messages': typeof AuthenticatedTrainerMessagesRoute
   '/trainer/plans': typeof AuthenticatedTrainerPlansRoute
   '/trainer/profile': typeof AuthenticatedTrainerProfileRoute
-  '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/admin/': typeof AdminportalAdminIndexRoute
   '/trainer/': typeof AuthenticatedTrainerIndexRoute
 }
 export interface FileRoutesByTo {
@@ -286,33 +295,35 @@ export interface FileRoutesByTo {
   '/status': typeof StatusRoute
   '/trainers': typeof TrainersRoute
   '/member': typeof AuthenticatedMemberRoute
+  '/admin/login': typeof AdminLoginRoute
   '/join/member': typeof JoinMemberRoute
   '/join/trainer': typeof JoinTrainerRoute
   '/join': typeof JoinIndexRoute
-  '/admin/ai': typeof AuthenticatedAdminAiRoute
-  '/admin/analytics': typeof AuthenticatedAdminAnalyticsRoute
-  '/admin/approvals': typeof AuthenticatedAdminApprovalsRoute
-  '/admin/bookings': typeof AuthenticatedAdminBookingsRoute
-  '/admin/classes': typeof AuthenticatedAdminClassesRoute
-  '/admin/content': typeof AuthenticatedAdminContentRoute
-  '/admin/equipment': typeof AuthenticatedAdminEquipmentRoute
-  '/admin/exercises': typeof AuthenticatedAdminExercisesRoute
-  '/admin/members': typeof AuthenticatedAdminMembersRoute
-  '/admin/memberships': typeof AuthenticatedAdminMembershipsRoute
-  '/admin/settings': typeof AuthenticatedAdminSettingsRoute
-  '/admin/trainers': typeof AuthenticatedAdminTrainersRoute
+  '/admin/ai': typeof AdminportalAdminAiRoute
+  '/admin/analytics': typeof AdminportalAdminAnalyticsRoute
+  '/admin/approvals': typeof AdminportalAdminApprovalsRoute
+  '/admin/bookings': typeof AdminportalAdminBookingsRoute
+  '/admin/classes': typeof AdminportalAdminClassesRoute
+  '/admin/content': typeof AdminportalAdminContentRoute
+  '/admin/equipment': typeof AdminportalAdminEquipmentRoute
+  '/admin/exercises': typeof AdminportalAdminExercisesRoute
+  '/admin/members': typeof AdminportalAdminMembersRoute
+  '/admin/memberships': typeof AdminportalAdminMembershipsRoute
+  '/admin/settings': typeof AdminportalAdminSettingsRoute
+  '/admin/trainers': typeof AdminportalAdminTrainersRoute
   '/trainer/attendance': typeof AuthenticatedTrainerAttendanceRoute
   '/trainer/classes': typeof AuthenticatedTrainerClassesRoute
   '/trainer/members': typeof AuthenticatedTrainerMembersRoute
   '/trainer/messages': typeof AuthenticatedTrainerMessagesRoute
   '/trainer/plans': typeof AuthenticatedTrainerPlansRoute
   '/trainer/profile': typeof AuthenticatedTrainerProfileRoute
-  '/admin': typeof AuthenticatedAdminIndexRoute
+  '/admin': typeof AdminportalAdminIndexRoute
   '/trainer': typeof AuthenticatedTrainerIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_adminportal': typeof AdminportalRouteRouteWithChildren
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
@@ -324,28 +335,29 @@ export interface FileRoutesById {
   '/status': typeof StatusRoute
   '/trainers': typeof TrainersRoute
   '/_authenticated/member': typeof AuthenticatedMemberRoute
+  '/admin/login': typeof AdminLoginRoute
   '/join/member': typeof JoinMemberRoute
   '/join/trainer': typeof JoinTrainerRoute
   '/join/': typeof JoinIndexRoute
-  '/_authenticated/admin/ai': typeof AuthenticatedAdminAiRoute
-  '/_authenticated/admin/analytics': typeof AuthenticatedAdminAnalyticsRoute
-  '/_authenticated/admin/approvals': typeof AuthenticatedAdminApprovalsRoute
-  '/_authenticated/admin/bookings': typeof AuthenticatedAdminBookingsRoute
-  '/_authenticated/admin/classes': typeof AuthenticatedAdminClassesRoute
-  '/_authenticated/admin/content': typeof AuthenticatedAdminContentRoute
-  '/_authenticated/admin/equipment': typeof AuthenticatedAdminEquipmentRoute
-  '/_authenticated/admin/exercises': typeof AuthenticatedAdminExercisesRoute
-  '/_authenticated/admin/members': typeof AuthenticatedAdminMembersRoute
-  '/_authenticated/admin/memberships': typeof AuthenticatedAdminMembershipsRoute
-  '/_authenticated/admin/settings': typeof AuthenticatedAdminSettingsRoute
-  '/_authenticated/admin/trainers': typeof AuthenticatedAdminTrainersRoute
+  '/_adminportal/admin/ai': typeof AdminportalAdminAiRoute
+  '/_adminportal/admin/analytics': typeof AdminportalAdminAnalyticsRoute
+  '/_adminportal/admin/approvals': typeof AdminportalAdminApprovalsRoute
+  '/_adminportal/admin/bookings': typeof AdminportalAdminBookingsRoute
+  '/_adminportal/admin/classes': typeof AdminportalAdminClassesRoute
+  '/_adminportal/admin/content': typeof AdminportalAdminContentRoute
+  '/_adminportal/admin/equipment': typeof AdminportalAdminEquipmentRoute
+  '/_adminportal/admin/exercises': typeof AdminportalAdminExercisesRoute
+  '/_adminportal/admin/members': typeof AdminportalAdminMembersRoute
+  '/_adminportal/admin/memberships': typeof AdminportalAdminMembershipsRoute
+  '/_adminportal/admin/settings': typeof AdminportalAdminSettingsRoute
+  '/_adminportal/admin/trainers': typeof AdminportalAdminTrainersRoute
   '/_authenticated/trainer/attendance': typeof AuthenticatedTrainerAttendanceRoute
   '/_authenticated/trainer/classes': typeof AuthenticatedTrainerClassesRoute
   '/_authenticated/trainer/members': typeof AuthenticatedTrainerMembersRoute
   '/_authenticated/trainer/messages': typeof AuthenticatedTrainerMessagesRoute
   '/_authenticated/trainer/plans': typeof AuthenticatedTrainerPlansRoute
   '/_authenticated/trainer/profile': typeof AuthenticatedTrainerProfileRoute
-  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_adminportal/admin/': typeof AdminportalAdminIndexRoute
   '/_authenticated/trainer/': typeof AuthenticatedTrainerIndexRoute
 }
 export interface FileRouteTypes {
@@ -362,6 +374,7 @@ export interface FileRouteTypes {
     | '/status'
     | '/trainers'
     | '/member'
+    | '/admin/login'
     | '/join/member'
     | '/join/trainer'
     | '/join/'
@@ -398,6 +411,7 @@ export interface FileRouteTypes {
     | '/status'
     | '/trainers'
     | '/member'
+    | '/admin/login'
     | '/join/member'
     | '/join/trainer'
     | '/join'
@@ -424,6 +438,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/_adminportal'
     | '/_authenticated'
     | '/about'
     | '/auth'
@@ -435,33 +450,35 @@ export interface FileRouteTypes {
     | '/status'
     | '/trainers'
     | '/_authenticated/member'
+    | '/admin/login'
     | '/join/member'
     | '/join/trainer'
     | '/join/'
-    | '/_authenticated/admin/ai'
-    | '/_authenticated/admin/analytics'
-    | '/_authenticated/admin/approvals'
-    | '/_authenticated/admin/bookings'
-    | '/_authenticated/admin/classes'
-    | '/_authenticated/admin/content'
-    | '/_authenticated/admin/equipment'
-    | '/_authenticated/admin/exercises'
-    | '/_authenticated/admin/members'
-    | '/_authenticated/admin/memberships'
-    | '/_authenticated/admin/settings'
-    | '/_authenticated/admin/trainers'
+    | '/_adminportal/admin/ai'
+    | '/_adminportal/admin/analytics'
+    | '/_adminportal/admin/approvals'
+    | '/_adminportal/admin/bookings'
+    | '/_adminportal/admin/classes'
+    | '/_adminportal/admin/content'
+    | '/_adminportal/admin/equipment'
+    | '/_adminportal/admin/exercises'
+    | '/_adminportal/admin/members'
+    | '/_adminportal/admin/memberships'
+    | '/_adminportal/admin/settings'
+    | '/_adminportal/admin/trainers'
     | '/_authenticated/trainer/attendance'
     | '/_authenticated/trainer/classes'
     | '/_authenticated/trainer/members'
     | '/_authenticated/trainer/messages'
     | '/_authenticated/trainer/plans'
     | '/_authenticated/trainer/profile'
-    | '/_authenticated/admin/'
+    | '/_adminportal/admin/'
     | '/_authenticated/trainer/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminportalRouteRoute: typeof AdminportalRouteRouteWithChildren
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   AuthRoute: typeof AuthRoute
@@ -472,6 +489,7 @@ export interface RootRouteChildren {
   ResetPasswordRoute: typeof ResetPasswordRoute
   StatusRoute: typeof StatusRoute
   TrainersRoute: typeof TrainersRoute
+  AdminLoginRoute: typeof AdminLoginRoute
   JoinMemberRoute: typeof JoinMemberRoute
   JoinTrainerRoute: typeof JoinTrainerRoute
   JoinIndexRoute: typeof JoinIndexRoute
@@ -484,6 +502,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_adminportal': {
+      id: '/_adminportal'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AdminportalRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated': {
@@ -563,6 +588,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMemberRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/join/': {
       id: '/join/'
       path: '/join'
@@ -584,96 +616,96 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JoinTrainerRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/admin/': {
-      id: '/_authenticated/admin/'
+    '/_adminportal/admin/': {
+      id: '/_adminportal/admin/'
       path: '/admin'
       fullPath: '/admin/'
-      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      preLoaderRoute: typeof AdminportalAdminIndexRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
-    '/_authenticated/admin/ai': {
-      id: '/_authenticated/admin/ai'
+    '/_adminportal/admin/ai': {
+      id: '/_adminportal/admin/ai'
       path: '/admin/ai'
       fullPath: '/admin/ai'
-      preLoaderRoute: typeof AuthenticatedAdminAiRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      preLoaderRoute: typeof AdminportalAdminAiRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
-    '/_authenticated/admin/analytics': {
-      id: '/_authenticated/admin/analytics'
+    '/_adminportal/admin/analytics': {
+      id: '/_adminportal/admin/analytics'
       path: '/admin/analytics'
       fullPath: '/admin/analytics'
-      preLoaderRoute: typeof AuthenticatedAdminAnalyticsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      preLoaderRoute: typeof AdminportalAdminAnalyticsRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
-    '/_authenticated/admin/approvals': {
-      id: '/_authenticated/admin/approvals'
+    '/_adminportal/admin/approvals': {
+      id: '/_adminportal/admin/approvals'
       path: '/admin/approvals'
       fullPath: '/admin/approvals'
-      preLoaderRoute: typeof AuthenticatedAdminApprovalsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      preLoaderRoute: typeof AdminportalAdminApprovalsRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
-    '/_authenticated/admin/bookings': {
-      id: '/_authenticated/admin/bookings'
+    '/_adminportal/admin/bookings': {
+      id: '/_adminportal/admin/bookings'
       path: '/admin/bookings'
       fullPath: '/admin/bookings'
-      preLoaderRoute: typeof AuthenticatedAdminBookingsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      preLoaderRoute: typeof AdminportalAdminBookingsRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
-    '/_authenticated/admin/classes': {
-      id: '/_authenticated/admin/classes'
+    '/_adminportal/admin/classes': {
+      id: '/_adminportal/admin/classes'
       path: '/admin/classes'
       fullPath: '/admin/classes'
-      preLoaderRoute: typeof AuthenticatedAdminClassesRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      preLoaderRoute: typeof AdminportalAdminClassesRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
-    '/_authenticated/admin/content': {
-      id: '/_authenticated/admin/content'
+    '/_adminportal/admin/content': {
+      id: '/_adminportal/admin/content'
       path: '/admin/content'
       fullPath: '/admin/content'
-      preLoaderRoute: typeof AuthenticatedAdminContentRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      preLoaderRoute: typeof AdminportalAdminContentRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
-    '/_authenticated/admin/equipment': {
-      id: '/_authenticated/admin/equipment'
+    '/_adminportal/admin/equipment': {
+      id: '/_adminportal/admin/equipment'
       path: '/admin/equipment'
       fullPath: '/admin/equipment'
-      preLoaderRoute: typeof AuthenticatedAdminEquipmentRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      preLoaderRoute: typeof AdminportalAdminEquipmentRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
-    '/_authenticated/admin/exercises': {
-      id: '/_authenticated/admin/exercises'
+    '/_adminportal/admin/exercises': {
+      id: '/_adminportal/admin/exercises'
       path: '/admin/exercises'
       fullPath: '/admin/exercises'
-      preLoaderRoute: typeof AuthenticatedAdminExercisesRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      preLoaderRoute: typeof AdminportalAdminExercisesRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
-    '/_authenticated/admin/members': {
-      id: '/_authenticated/admin/members'
+    '/_adminportal/admin/members': {
+      id: '/_adminportal/admin/members'
       path: '/admin/members'
       fullPath: '/admin/members'
-      preLoaderRoute: typeof AuthenticatedAdminMembersRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      preLoaderRoute: typeof AdminportalAdminMembersRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
-    '/_authenticated/admin/memberships': {
-      id: '/_authenticated/admin/memberships'
+    '/_adminportal/admin/memberships': {
+      id: '/_adminportal/admin/memberships'
       path: '/admin/memberships'
       fullPath: '/admin/memberships'
-      preLoaderRoute: typeof AuthenticatedAdminMembershipsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      preLoaderRoute: typeof AdminportalAdminMembershipsRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
-    '/_authenticated/admin/settings': {
-      id: '/_authenticated/admin/settings'
+    '/_adminportal/admin/settings': {
+      id: '/_adminportal/admin/settings'
       path: '/admin/settings'
       fullPath: '/admin/settings'
-      preLoaderRoute: typeof AuthenticatedAdminSettingsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      preLoaderRoute: typeof AdminportalAdminSettingsRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
-    '/_authenticated/admin/trainers': {
-      id: '/_authenticated/admin/trainers'
+    '/_adminportal/admin/trainers': {
+      id: '/_adminportal/admin/trainers'
       path: '/admin/trainers'
       fullPath: '/admin/trainers'
-      preLoaderRoute: typeof AuthenticatedAdminTrainersRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      preLoaderRoute: typeof AdminportalAdminTrainersRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
     '/_authenticated/trainer/': {
       id: '/_authenticated/trainer/'
@@ -727,51 +759,60 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AdminportalRouteRouteChildren {
+  AdminportalAdminAiRoute: typeof AdminportalAdminAiRoute
+  AdminportalAdminAnalyticsRoute: typeof AdminportalAdminAnalyticsRoute
+  AdminportalAdminApprovalsRoute: typeof AdminportalAdminApprovalsRoute
+  AdminportalAdminBookingsRoute: typeof AdminportalAdminBookingsRoute
+  AdminportalAdminClassesRoute: typeof AdminportalAdminClassesRoute
+  AdminportalAdminContentRoute: typeof AdminportalAdminContentRoute
+  AdminportalAdminEquipmentRoute: typeof AdminportalAdminEquipmentRoute
+  AdminportalAdminExercisesRoute: typeof AdminportalAdminExercisesRoute
+  AdminportalAdminMembersRoute: typeof AdminportalAdminMembersRoute
+  AdminportalAdminMembershipsRoute: typeof AdminportalAdminMembershipsRoute
+  AdminportalAdminSettingsRoute: typeof AdminportalAdminSettingsRoute
+  AdminportalAdminTrainersRoute: typeof AdminportalAdminTrainersRoute
+  AdminportalAdminIndexRoute: typeof AdminportalAdminIndexRoute
+}
+
+const AdminportalRouteRouteChildren: AdminportalRouteRouteChildren = {
+  AdminportalAdminAiRoute: AdminportalAdminAiRoute,
+  AdminportalAdminAnalyticsRoute: AdminportalAdminAnalyticsRoute,
+  AdminportalAdminApprovalsRoute: AdminportalAdminApprovalsRoute,
+  AdminportalAdminBookingsRoute: AdminportalAdminBookingsRoute,
+  AdminportalAdminClassesRoute: AdminportalAdminClassesRoute,
+  AdminportalAdminContentRoute: AdminportalAdminContentRoute,
+  AdminportalAdminEquipmentRoute: AdminportalAdminEquipmentRoute,
+  AdminportalAdminExercisesRoute: AdminportalAdminExercisesRoute,
+  AdminportalAdminMembersRoute: AdminportalAdminMembersRoute,
+  AdminportalAdminMembershipsRoute: AdminportalAdminMembershipsRoute,
+  AdminportalAdminSettingsRoute: AdminportalAdminSettingsRoute,
+  AdminportalAdminTrainersRoute: AdminportalAdminTrainersRoute,
+  AdminportalAdminIndexRoute: AdminportalAdminIndexRoute,
+}
+
+const AdminportalRouteRouteWithChildren =
+  AdminportalRouteRoute._addFileChildren(AdminportalRouteRouteChildren)
+
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedMemberRoute: typeof AuthenticatedMemberRoute
-  AuthenticatedAdminAiRoute: typeof AuthenticatedAdminAiRoute
-  AuthenticatedAdminAnalyticsRoute: typeof AuthenticatedAdminAnalyticsRoute
-  AuthenticatedAdminApprovalsRoute: typeof AuthenticatedAdminApprovalsRoute
-  AuthenticatedAdminBookingsRoute: typeof AuthenticatedAdminBookingsRoute
-  AuthenticatedAdminClassesRoute: typeof AuthenticatedAdminClassesRoute
-  AuthenticatedAdminContentRoute: typeof AuthenticatedAdminContentRoute
-  AuthenticatedAdminEquipmentRoute: typeof AuthenticatedAdminEquipmentRoute
-  AuthenticatedAdminExercisesRoute: typeof AuthenticatedAdminExercisesRoute
-  AuthenticatedAdminMembersRoute: typeof AuthenticatedAdminMembersRoute
-  AuthenticatedAdminMembershipsRoute: typeof AuthenticatedAdminMembershipsRoute
-  AuthenticatedAdminSettingsRoute: typeof AuthenticatedAdminSettingsRoute
-  AuthenticatedAdminTrainersRoute: typeof AuthenticatedAdminTrainersRoute
   AuthenticatedTrainerAttendanceRoute: typeof AuthenticatedTrainerAttendanceRoute
   AuthenticatedTrainerClassesRoute: typeof AuthenticatedTrainerClassesRoute
   AuthenticatedTrainerMembersRoute: typeof AuthenticatedTrainerMembersRoute
   AuthenticatedTrainerMessagesRoute: typeof AuthenticatedTrainerMessagesRoute
   AuthenticatedTrainerPlansRoute: typeof AuthenticatedTrainerPlansRoute
   AuthenticatedTrainerProfileRoute: typeof AuthenticatedTrainerProfileRoute
-  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
   AuthenticatedTrainerIndexRoute: typeof AuthenticatedTrainerIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedMemberRoute: AuthenticatedMemberRoute,
-  AuthenticatedAdminAiRoute: AuthenticatedAdminAiRoute,
-  AuthenticatedAdminAnalyticsRoute: AuthenticatedAdminAnalyticsRoute,
-  AuthenticatedAdminApprovalsRoute: AuthenticatedAdminApprovalsRoute,
-  AuthenticatedAdminBookingsRoute: AuthenticatedAdminBookingsRoute,
-  AuthenticatedAdminClassesRoute: AuthenticatedAdminClassesRoute,
-  AuthenticatedAdminContentRoute: AuthenticatedAdminContentRoute,
-  AuthenticatedAdminEquipmentRoute: AuthenticatedAdminEquipmentRoute,
-  AuthenticatedAdminExercisesRoute: AuthenticatedAdminExercisesRoute,
-  AuthenticatedAdminMembersRoute: AuthenticatedAdminMembersRoute,
-  AuthenticatedAdminMembershipsRoute: AuthenticatedAdminMembershipsRoute,
-  AuthenticatedAdminSettingsRoute: AuthenticatedAdminSettingsRoute,
-  AuthenticatedAdminTrainersRoute: AuthenticatedAdminTrainersRoute,
   AuthenticatedTrainerAttendanceRoute: AuthenticatedTrainerAttendanceRoute,
   AuthenticatedTrainerClassesRoute: AuthenticatedTrainerClassesRoute,
   AuthenticatedTrainerMembersRoute: AuthenticatedTrainerMembersRoute,
   AuthenticatedTrainerMessagesRoute: AuthenticatedTrainerMessagesRoute,
   AuthenticatedTrainerPlansRoute: AuthenticatedTrainerPlansRoute,
   AuthenticatedTrainerProfileRoute: AuthenticatedTrainerProfileRoute,
-  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
   AuthenticatedTrainerIndexRoute: AuthenticatedTrainerIndexRoute,
 }
 
@@ -780,6 +821,7 @@ const AuthenticatedRouteRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminportalRouteRoute: AdminportalRouteRouteWithChildren,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   AuthRoute: AuthRoute,
@@ -790,6 +832,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResetPasswordRoute: ResetPasswordRoute,
   StatusRoute: StatusRoute,
   TrainersRoute: TrainersRoute,
+  AdminLoginRoute: AdminLoginRoute,
   JoinMemberRoute: JoinMemberRoute,
   JoinTrainerRoute: JoinTrainerRoute,
   JoinIndexRoute: JoinIndexRoute,

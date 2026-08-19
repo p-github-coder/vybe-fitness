@@ -9,7 +9,7 @@ import { Switch } from "@/components/ui/switch";
 import { supabase } from "@/integrations/supabase/client";
 import { siteContentQuery } from "@/lib/gym-data";
 
-export const Route = createFileRoute("/_authenticated/admin/ai")({
+export const Route = createFileRoute("/_adminportal/admin/ai")({
   head: head("AI management", "Control the AI-powered features across the platform."),
   component: AiPage,
 });

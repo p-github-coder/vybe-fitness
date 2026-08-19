@@ -56,7 +56,7 @@ export function Footer() {
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} VYBE Fitness. Your fitness. Your VYBE.
           </p>
-          <Link to="/admin" className="text-xs text-muted-foreground transition-colors hover:text-foreground">
+          <Link to="/admin/login" className="text-xs text-muted-foreground transition-colors hover:text-foreground">
             Admin
           </Link>
         </div>

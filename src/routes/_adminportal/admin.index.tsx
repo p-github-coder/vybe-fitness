@@ -30,7 +30,7 @@ import {
 } from "@/lib/gym-data";
 import { formatPrice } from "@/lib/site-data";
 
-export const Route = createFileRoute("/_authenticated/admin/")({
+export const Route = createFileRoute("/_adminportal/admin/")({
   head: head("Admin Dashboard", "Gym operations overview for VYBE Fitness administrators."),
   component: AdminHome,
 });

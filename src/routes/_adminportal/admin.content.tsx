@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { announcementsQuery, faqsQuery, siteContentQuery } from "@/lib/gym-data";
 
-export const Route = createFileRoute("/_authenticated/admin/content")({
+export const Route = createFileRoute("/_adminportal/admin/content")({
   head: head("Website content", "Edit homepage copy, FAQs and announcements."),
   component: ContentPage,
 });

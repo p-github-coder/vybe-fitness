@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { supabase } from "@/integrations/supabase/client";
 import { siteContentQuery } from "@/lib/gym-data";
 
-export const Route = createFileRoute("/_authenticated/admin/settings")({
+export const Route = createFileRoute("/_adminportal/admin/settings")({
   head: head("Settings", "Gym contact details and general platform settings."),
   component: SettingsPage,
 });

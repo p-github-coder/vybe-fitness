@@ -3,25 +3,25 @@ import { createFileRoute } from "@tanstack/react-router";
 import { AdminPage, head } from "@/components/dashboard/AdminPage";
 import { CrudManager } from "@/components/dashboard/CrudManager";
 import { Badge } from "@/components/ui/badge";
-import { equipmentQuery } from "@/lib/gym-data";
+import { exercisesQuery } from "@/lib/gym-data";
 
-export const Route = createFileRoute("/_authenticated/admin/equipment")({
-  head: head("Equipment", "Manage the gym floor equipment catalogue."),
-  component: EquipmentPage,
+export const Route = createFileRoute("/_adminportal/admin/exercises")({
+  head: head("Exercises", "Manage the exercise library used in workout plans."),
+  component: ExercisesPage,
 });
 
-function EquipmentPage() {
+function ExercisesPage() {
   return (
-    <AdminPage title="Equipment" description="Machines, racks and tools on the floor">
+    <AdminPage title="Exercises" description="The movement library behind every workout plan">
       <CrudManager
-        table="equipment"
-        query={equipmentQuery}
-        entityLabel="Equipment item"
+        table="exercises"
+        query={exercisesQuery}
+        entityLabel="Exercise"
         searchKeys={["name", "description"]}
         columns={[
           {
             key: "name",
-            header: "Equipment",
+            header: "Exercise",
             render: (r) => (
               <div className="flex items-center gap-3">
                 {r.image && <img src={r.image} alt="" className="h-9 w-9 rounded-md object-cover" />}
@@ -42,17 +42,18 @@ function EquipmentPage() {
           },
           { key: "difficulty", header: "Difficulty", render: (r) => r.difficulty ?? "—" },
           {
-            key: "published",
-            header: "Visibility",
-            render: (r) => <Badge variant={r.published ? "default" : "secondary"}>{r.published ? "Published" : "Hidden"}</Badge>,
+            key: "instructions",
+            header: "Instructions",
+            render: (r) => <span className="line-clamp-1 text-muted-foreground">{r.instructions ?? "—"}</span>,
           },
         ]}
         fields={[
           { name: "name", label: "Name", type: "text" },
           { name: "image", label: "Image URL", type: "text" },
           { name: "description", label: "Description", type: "textarea" },
+          { name: "instructions", label: "Instructions", type: "textarea" },
           { name: "target_muscles", label: "Target muscles", type: "array" },
-          { name: "difficulty", label: "Difficulty", type: "select", options: ["Beginner", "Intermediate", "Advanced", "All levels"].map((v) => ({ value: v, label: v })) },
+          { name: "difficulty", label: "Difficulty", type: "select", options: ["Beginner", "Intermediate", "Advanced"].map((v) => ({ value: v, label: v })) },
           { name: "published", label: "Published", type: "boolean", defaultValue: true },
         ]}
       />
