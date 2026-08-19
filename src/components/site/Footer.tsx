@@ -52,10 +52,16 @@ export function Footer() {
         ))}
       </div>
       <div className="border-t border-border">
-        <p className="mx-auto max-w-7xl px-4 py-6 text-xs text-muted-foreground sm:px-6 lg:px-8">
-          © {new Date().getFullYear()} VYBE Fitness. Your fitness. Your VYBE.
-        </p>
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-6 sm:px-6 lg:px-8">
+          <p className="text-xs text-muted-foreground">
+            © {new Date().getFullYear()} VYBE Fitness. Your fitness. Your VYBE.
+          </p>
+          <Link to="/admin" className="text-xs text-muted-foreground transition-colors hover:text-foreground">
+            Admin
+          </Link>
+        </div>
       </div>
+
     </footer>
   );
 }
