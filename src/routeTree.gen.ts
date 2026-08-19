@@ -22,6 +22,7 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as StatusRouteImport } from './routes/status'
 import { Route as TrainersRouteImport } from './routes/trainers'
 import { Route as AuthenticatedMemberRouteImport } from './routes/_authenticated/member'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as JoinIndexRouteImport } from './routes/join.index'
 import { Route as JoinMemberRouteImport } from './routes/join.member'
 import { Route as JoinTrainerRouteImport } from './routes/join.trainer'
@@ -108,6 +109,11 @@ const AuthenticatedMemberRoute = AuthenticatedMemberRouteImport.update({
   id: '/member',
   path: '/member',
   getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const JoinIndexRoute = JoinIndexRouteImport.update({
   id: '/join/',
@@ -252,6 +258,7 @@ export interface FileRoutesByFullPath {
   '/status': typeof StatusRoute
   '/trainers': typeof TrainersRoute
   '/member': typeof AuthenticatedMemberRoute
+  '/admin/login': typeof AdminLoginRoute
   '/join/member': typeof JoinMemberRoute
   '/join/trainer': typeof JoinTrainerRoute
   '/join/': typeof JoinIndexRoute
@@ -288,6 +295,7 @@ export interface FileRoutesByTo {
   '/status': typeof StatusRoute
   '/trainers': typeof TrainersRoute
   '/member': typeof AuthenticatedMemberRoute
+  '/admin/login': typeof AdminLoginRoute
   '/join/member': typeof JoinMemberRoute
   '/join/trainer': typeof JoinTrainerRoute
   '/join': typeof JoinIndexRoute
@@ -327,6 +335,7 @@ export interface FileRoutesById {
   '/status': typeof StatusRoute
   '/trainers': typeof TrainersRoute
   '/_authenticated/member': typeof AuthenticatedMemberRoute
+  '/admin/login': typeof AdminLoginRoute
   '/join/member': typeof JoinMemberRoute
   '/join/trainer': typeof JoinTrainerRoute
   '/join/': typeof JoinIndexRoute
@@ -365,6 +374,7 @@ export interface FileRouteTypes {
     | '/status'
     | '/trainers'
     | '/member'
+    | '/admin/login'
     | '/join/member'
     | '/join/trainer'
     | '/join/'
@@ -401,6 +411,7 @@ export interface FileRouteTypes {
     | '/status'
     | '/trainers'
     | '/member'
+    | '/admin/login'
     | '/join/member'
     | '/join/trainer'
     | '/join'
@@ -439,6 +450,7 @@ export interface FileRouteTypes {
     | '/status'
     | '/trainers'
     | '/_authenticated/member'
+    | '/admin/login'
     | '/join/member'
     | '/join/trainer'
     | '/join/'
@@ -477,6 +489,7 @@ export interface RootRouteChildren {
   ResetPasswordRoute: typeof ResetPasswordRoute
   StatusRoute: typeof StatusRoute
   TrainersRoute: typeof TrainersRoute
+  AdminLoginRoute: typeof AdminLoginRoute
   JoinMemberRoute: typeof JoinMemberRoute
   JoinTrainerRoute: typeof JoinTrainerRoute
   JoinIndexRoute: typeof JoinIndexRoute
@@ -574,6 +587,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/member'
       preLoaderRoute: typeof AuthenticatedMemberRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/join/': {
       id: '/join/'
@@ -812,6 +832,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResetPasswordRoute: ResetPasswordRoute,
   StatusRoute: StatusRoute,
   TrainersRoute: TrainersRoute,
+  AdminLoginRoute: AdminLoginRoute,
   JoinMemberRoute: JoinMemberRoute,
   JoinTrainerRoute: JoinTrainerRoute,
   JoinIndexRoute: JoinIndexRoute,
