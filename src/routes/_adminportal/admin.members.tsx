@@ -29,7 +29,7 @@ import {
   type AdminProfile,
 } from "@/lib/gym-data";
 
-export const Route = createFileRoute("/_authenticated/admin/members")({
+export const Route = createFileRoute("/_adminportal/admin/members")({
   head: head("Members", "Manage every VYBE Fitness member account."),
   component: MembersPage,
 });

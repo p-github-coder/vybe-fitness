@@ -28,7 +28,7 @@ import {
 } from "@/lib/gym-data";
 import { formatPrice } from "@/lib/site-data";
 
-export const Route = createFileRoute("/_authenticated/admin/analytics")({
+export const Route = createFileRoute("/_adminportal/admin/analytics")({
   head: head("Analytics", "Revenue, attendance and class performance analytics."),
   component: AnalyticsPage,
 });

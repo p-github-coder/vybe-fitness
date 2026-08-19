@@ -5,7 +5,7 @@ import { CrudManager } from "@/components/dashboard/CrudManager";
 import { Badge } from "@/components/ui/badge";
 import { equipmentQuery } from "@/lib/gym-data";
 
-export const Route = createFileRoute("/_authenticated/admin/equipment")({
+export const Route = createFileRoute("/_adminportal/admin/equipment")({
   head: head("Equipment", "Manage the gym floor equipment catalogue."),
   component: EquipmentPage,
 });

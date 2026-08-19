@@ -22,7 +22,7 @@ import {
   type BookingStatus,
 } from "@/lib/gym-data";
 
-export const Route = createFileRoute("/_authenticated/admin/bookings")({
+export const Route = createFileRoute("/_adminportal/admin/bookings")({
   head: head("Bookings", "Track class bookings and attendance across the gym."),
   component: BookingsPage,
 });

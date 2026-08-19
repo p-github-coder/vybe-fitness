@@ -5,7 +5,7 @@ import { CrudManager } from "@/components/dashboard/CrudManager";
 import { Badge } from "@/components/ui/badge";
 import { allTrainersQuery } from "@/lib/gym-data";
 
-export const Route = createFileRoute("/_authenticated/admin/trainers")({
+export const Route = createFileRoute("/_adminportal/admin/trainers")({
   head: head("Trainers", "Manage trainer profiles, specialties and assignments."),
   component: TrainersPage,
 });

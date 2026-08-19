@@ -5,7 +5,7 @@ import { CrudManager } from "@/components/dashboard/CrudManager";
 import { Badge } from "@/components/ui/badge";
 import { exercisesQuery } from "@/lib/gym-data";
 
-export const Route = createFileRoute("/_authenticated/admin/exercises")({
+export const Route = createFileRoute("/_adminportal/admin/exercises")({
   head: head("Exercises", "Manage the exercise library used in workout plans."),
   component: ExercisesPage,
 });
