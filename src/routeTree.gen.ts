@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminportalRouteRouteImport } from './routes/_adminportal/route'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -48,6 +49,10 @@ import { Route as AuthenticatedTrainerProfileRouteImport } from './routes/_authe
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminportalRouteRoute = AdminportalRouteRouteImport.update({
+  id: '/_adminportal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
@@ -120,77 +125,77 @@ const JoinTrainerRoute = JoinTrainerRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminportalAdminIndexRoute = AdminportalAdminIndexRouteImport.update({
-  id: '/_adminportal/admin/',
+  id: '/admin/',
   path: '/admin/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AdminportalRouteRoute,
 } as any)
 const AdminportalAdminAiRoute = AdminportalAdminAiRouteImport.update({
-  id: '/_adminportal/admin/ai',
+  id: '/admin/ai',
   path: '/admin/ai',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AdminportalRouteRoute,
 } as any)
 const AdminportalAdminAnalyticsRoute =
   AdminportalAdminAnalyticsRouteImport.update({
-    id: '/_adminportal/admin/analytics',
+    id: '/admin/analytics',
     path: '/admin/analytics',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AdminportalRouteRoute,
   } as any)
 const AdminportalAdminApprovalsRoute =
   AdminportalAdminApprovalsRouteImport.update({
-    id: '/_adminportal/admin/approvals',
+    id: '/admin/approvals',
     path: '/admin/approvals',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AdminportalRouteRoute,
   } as any)
 const AdminportalAdminBookingsRoute =
   AdminportalAdminBookingsRouteImport.update({
-    id: '/_adminportal/admin/bookings',
+    id: '/admin/bookings',
     path: '/admin/bookings',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AdminportalRouteRoute,
   } as any)
 const AdminportalAdminClassesRoute = AdminportalAdminClassesRouteImport.update({
-  id: '/_adminportal/admin/classes',
+  id: '/admin/classes',
   path: '/admin/classes',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AdminportalRouteRoute,
 } as any)
 const AdminportalAdminContentRoute = AdminportalAdminContentRouteImport.update({
-  id: '/_adminportal/admin/content',
+  id: '/admin/content',
   path: '/admin/content',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AdminportalRouteRoute,
 } as any)
 const AdminportalAdminEquipmentRoute =
   AdminportalAdminEquipmentRouteImport.update({
-    id: '/_adminportal/admin/equipment',
+    id: '/admin/equipment',
     path: '/admin/equipment',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AdminportalRouteRoute,
   } as any)
 const AdminportalAdminExercisesRoute =
   AdminportalAdminExercisesRouteImport.update({
-    id: '/_adminportal/admin/exercises',
+    id: '/admin/exercises',
     path: '/admin/exercises',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AdminportalRouteRoute,
   } as any)
 const AdminportalAdminMembersRoute = AdminportalAdminMembersRouteImport.update({
-  id: '/_adminportal/admin/members',
+  id: '/admin/members',
   path: '/admin/members',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AdminportalRouteRoute,
 } as any)
 const AdminportalAdminMembershipsRoute =
   AdminportalAdminMembershipsRouteImport.update({
-    id: '/_adminportal/admin/memberships',
+    id: '/admin/memberships',
     path: '/admin/memberships',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AdminportalRouteRoute,
   } as any)
 const AdminportalAdminSettingsRoute =
   AdminportalAdminSettingsRouteImport.update({
-    id: '/_adminportal/admin/settings',
+    id: '/admin/settings',
     path: '/admin/settings',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AdminportalRouteRoute,
   } as any)
 const AdminportalAdminTrainersRoute =
   AdminportalAdminTrainersRouteImport.update({
-    id: '/_adminportal/admin/trainers',
+    id: '/admin/trainers',
     path: '/admin/trainers',
-    getParentRoute: () => rootRouteImport,
+    getParentRoute: () => AdminportalRouteRoute,
   } as any)
 const AuthenticatedTrainerIndexRoute =
   AuthenticatedTrainerIndexRouteImport.update({
@@ -310,6 +315,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_adminportal': typeof AdminportalRouteRouteWithChildren
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/auth': typeof AuthRoute
@@ -421,6 +427,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/_adminportal'
     | '/_authenticated'
     | '/about'
     | '/auth'
@@ -459,6 +466,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminportalRouteRoute: typeof AdminportalRouteRouteWithChildren
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   AuthRoute: typeof AuthRoute
@@ -472,19 +480,6 @@ export interface RootRouteChildren {
   JoinMemberRoute: typeof JoinMemberRoute
   JoinTrainerRoute: typeof JoinTrainerRoute
   JoinIndexRoute: typeof JoinIndexRoute
-  AdminportalAdminAiRoute: typeof AdminportalAdminAiRoute
-  AdminportalAdminAnalyticsRoute: typeof AdminportalAdminAnalyticsRoute
-  AdminportalAdminApprovalsRoute: typeof AdminportalAdminApprovalsRoute
-  AdminportalAdminBookingsRoute: typeof AdminportalAdminBookingsRoute
-  AdminportalAdminClassesRoute: typeof AdminportalAdminClassesRoute
-  AdminportalAdminContentRoute: typeof AdminportalAdminContentRoute
-  AdminportalAdminEquipmentRoute: typeof AdminportalAdminEquipmentRoute
-  AdminportalAdminExercisesRoute: typeof AdminportalAdminExercisesRoute
-  AdminportalAdminMembersRoute: typeof AdminportalAdminMembersRoute
-  AdminportalAdminMembershipsRoute: typeof AdminportalAdminMembershipsRoute
-  AdminportalAdminSettingsRoute: typeof AdminportalAdminSettingsRoute
-  AdminportalAdminTrainersRoute: typeof AdminportalAdminTrainersRoute
-  AdminportalAdminIndexRoute: typeof AdminportalAdminIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -494,6 +489,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_adminportal': {
+      id: '/_adminportal'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AdminportalRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated': {
@@ -599,91 +601,91 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminportalAdminIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
     '/_adminportal/admin/ai': {
       id: '/_adminportal/admin/ai'
       path: '/admin/ai'
       fullPath: '/admin/ai'
       preLoaderRoute: typeof AdminportalAdminAiRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
     '/_adminportal/admin/analytics': {
       id: '/_adminportal/admin/analytics'
       path: '/admin/analytics'
       fullPath: '/admin/analytics'
       preLoaderRoute: typeof AdminportalAdminAnalyticsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
     '/_adminportal/admin/approvals': {
       id: '/_adminportal/admin/approvals'
       path: '/admin/approvals'
       fullPath: '/admin/approvals'
       preLoaderRoute: typeof AdminportalAdminApprovalsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
     '/_adminportal/admin/bookings': {
       id: '/_adminportal/admin/bookings'
       path: '/admin/bookings'
       fullPath: '/admin/bookings'
       preLoaderRoute: typeof AdminportalAdminBookingsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
     '/_adminportal/admin/classes': {
       id: '/_adminportal/admin/classes'
       path: '/admin/classes'
       fullPath: '/admin/classes'
       preLoaderRoute: typeof AdminportalAdminClassesRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
     '/_adminportal/admin/content': {
       id: '/_adminportal/admin/content'
       path: '/admin/content'
       fullPath: '/admin/content'
       preLoaderRoute: typeof AdminportalAdminContentRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
     '/_adminportal/admin/equipment': {
       id: '/_adminportal/admin/equipment'
       path: '/admin/equipment'
       fullPath: '/admin/equipment'
       preLoaderRoute: typeof AdminportalAdminEquipmentRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
     '/_adminportal/admin/exercises': {
       id: '/_adminportal/admin/exercises'
       path: '/admin/exercises'
       fullPath: '/admin/exercises'
       preLoaderRoute: typeof AdminportalAdminExercisesRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
     '/_adminportal/admin/members': {
       id: '/_adminportal/admin/members'
       path: '/admin/members'
       fullPath: '/admin/members'
       preLoaderRoute: typeof AdminportalAdminMembersRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
     '/_adminportal/admin/memberships': {
       id: '/_adminportal/admin/memberships'
       path: '/admin/memberships'
       fullPath: '/admin/memberships'
       preLoaderRoute: typeof AdminportalAdminMembershipsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
     '/_adminportal/admin/settings': {
       id: '/_adminportal/admin/settings'
       path: '/admin/settings'
       fullPath: '/admin/settings'
       preLoaderRoute: typeof AdminportalAdminSettingsRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
     '/_adminportal/admin/trainers': {
       id: '/_adminportal/admin/trainers'
       path: '/admin/trainers'
       fullPath: '/admin/trainers'
       preLoaderRoute: typeof AdminportalAdminTrainersRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof AdminportalRouteRoute
     }
     '/_authenticated/trainer/': {
       id: '/_authenticated/trainer/'
@@ -737,6 +739,41 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AdminportalRouteRouteChildren {
+  AdminportalAdminAiRoute: typeof AdminportalAdminAiRoute
+  AdminportalAdminAnalyticsRoute: typeof AdminportalAdminAnalyticsRoute
+  AdminportalAdminApprovalsRoute: typeof AdminportalAdminApprovalsRoute
+  AdminportalAdminBookingsRoute: typeof AdminportalAdminBookingsRoute
+  AdminportalAdminClassesRoute: typeof AdminportalAdminClassesRoute
+  AdminportalAdminContentRoute: typeof AdminportalAdminContentRoute
+  AdminportalAdminEquipmentRoute: typeof AdminportalAdminEquipmentRoute
+  AdminportalAdminExercisesRoute: typeof AdminportalAdminExercisesRoute
+  AdminportalAdminMembersRoute: typeof AdminportalAdminMembersRoute
+  AdminportalAdminMembershipsRoute: typeof AdminportalAdminMembershipsRoute
+  AdminportalAdminSettingsRoute: typeof AdminportalAdminSettingsRoute
+  AdminportalAdminTrainersRoute: typeof AdminportalAdminTrainersRoute
+  AdminportalAdminIndexRoute: typeof AdminportalAdminIndexRoute
+}
+
+const AdminportalRouteRouteChildren: AdminportalRouteRouteChildren = {
+  AdminportalAdminAiRoute: AdminportalAdminAiRoute,
+  AdminportalAdminAnalyticsRoute: AdminportalAdminAnalyticsRoute,
+  AdminportalAdminApprovalsRoute: AdminportalAdminApprovalsRoute,
+  AdminportalAdminBookingsRoute: AdminportalAdminBookingsRoute,
+  AdminportalAdminClassesRoute: AdminportalAdminClassesRoute,
+  AdminportalAdminContentRoute: AdminportalAdminContentRoute,
+  AdminportalAdminEquipmentRoute: AdminportalAdminEquipmentRoute,
+  AdminportalAdminExercisesRoute: AdminportalAdminExercisesRoute,
+  AdminportalAdminMembersRoute: AdminportalAdminMembersRoute,
+  AdminportalAdminMembershipsRoute: AdminportalAdminMembershipsRoute,
+  AdminportalAdminSettingsRoute: AdminportalAdminSettingsRoute,
+  AdminportalAdminTrainersRoute: AdminportalAdminTrainersRoute,
+  AdminportalAdminIndexRoute: AdminportalAdminIndexRoute,
+}
+
+const AdminportalRouteRouteWithChildren =
+  AdminportalRouteRoute._addFileChildren(AdminportalRouteRouteChildren)
+
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedMemberRoute: typeof AuthenticatedMemberRoute
   AuthenticatedTrainerAttendanceRoute: typeof AuthenticatedTrainerAttendanceRoute
@@ -764,6 +801,7 @@ const AuthenticatedRouteRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminportalRouteRoute: AdminportalRouteRouteWithChildren,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   AuthRoute: AuthRoute,
@@ -777,19 +815,6 @@ const rootRouteChildren: RootRouteChildren = {
   JoinMemberRoute: JoinMemberRoute,
   JoinTrainerRoute: JoinTrainerRoute,
   JoinIndexRoute: JoinIndexRoute,
-  AdminportalAdminAiRoute: AdminportalAdminAiRoute,
-  AdminportalAdminAnalyticsRoute: AdminportalAdminAnalyticsRoute,
-  AdminportalAdminApprovalsRoute: AdminportalAdminApprovalsRoute,
-  AdminportalAdminBookingsRoute: AdminportalAdminBookingsRoute,
-  AdminportalAdminClassesRoute: AdminportalAdminClassesRoute,
-  AdminportalAdminContentRoute: AdminportalAdminContentRoute,
-  AdminportalAdminEquipmentRoute: AdminportalAdminEquipmentRoute,
-  AdminportalAdminExercisesRoute: AdminportalAdminExercisesRoute,
-  AdminportalAdminMembersRoute: AdminportalAdminMembersRoute,
-  AdminportalAdminMembershipsRoute: AdminportalAdminMembershipsRoute,
-  AdminportalAdminSettingsRoute: AdminportalAdminSettingsRoute,
-  AdminportalAdminTrainersRoute: AdminportalAdminTrainersRoute,
-  AdminportalAdminIndexRoute: AdminportalAdminIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
