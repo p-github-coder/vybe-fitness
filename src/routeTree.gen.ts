@@ -21,11 +21,29 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as StatusRouteImport } from './routes/status'
 import { Route as TrainersRouteImport } from './routes/trainers'
 import { Route as AuthenticatedMemberRouteImport } from './routes/_authenticated/member'
-import { Route as AuthenticatedTrainerRouteImport } from './routes/_authenticated/trainer'
 import { Route as JoinIndexRouteImport } from './routes/join.index'
 import { Route as JoinMemberRouteImport } from './routes/join.member'
 import { Route as JoinTrainerRouteImport } from './routes/join.trainer'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
+import { Route as AuthenticatedAdminAiRouteImport } from './routes/_authenticated/admin.ai'
+import { Route as AuthenticatedAdminAnalyticsRouteImport } from './routes/_authenticated/admin.analytics'
 import { Route as AuthenticatedAdminApprovalsRouteImport } from './routes/_authenticated/admin.approvals'
+import { Route as AuthenticatedAdminBookingsRouteImport } from './routes/_authenticated/admin.bookings'
+import { Route as AuthenticatedAdminClassesRouteImport } from './routes/_authenticated/admin.classes'
+import { Route as AuthenticatedAdminContentRouteImport } from './routes/_authenticated/admin.content'
+import { Route as AuthenticatedAdminEquipmentRouteImport } from './routes/_authenticated/admin.equipment'
+import { Route as AuthenticatedAdminExercisesRouteImport } from './routes/_authenticated/admin.exercises'
+import { Route as AuthenticatedAdminMembersRouteImport } from './routes/_authenticated/admin.members'
+import { Route as AuthenticatedAdminMembershipsRouteImport } from './routes/_authenticated/admin.memberships'
+import { Route as AuthenticatedAdminSettingsRouteImport } from './routes/_authenticated/admin.settings'
+import { Route as AuthenticatedAdminTrainersRouteImport } from './routes/_authenticated/admin.trainers'
+import { Route as AuthenticatedTrainerIndexRouteImport } from './routes/_authenticated/trainer.index'
+import { Route as AuthenticatedTrainerAttendanceRouteImport } from './routes/_authenticated/trainer.attendance'
+import { Route as AuthenticatedTrainerClassesRouteImport } from './routes/_authenticated/trainer.classes'
+import { Route as AuthenticatedTrainerMembersRouteImport } from './routes/_authenticated/trainer.members'
+import { Route as AuthenticatedTrainerMessagesRouteImport } from './routes/_authenticated/trainer.messages'
+import { Route as AuthenticatedTrainerPlansRouteImport } from './routes/_authenticated/trainer.plans'
+import { Route as AuthenticatedTrainerProfileRouteImport } from './routes/_authenticated/trainer.profile'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -86,11 +104,6 @@ const AuthenticatedMemberRoute = AuthenticatedMemberRouteImport.update({
   path: '/member',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedTrainerRoute = AuthenticatedTrainerRouteImport.update({
-  id: '/trainer',
-  path: '/trainer',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 const JoinIndexRoute = JoinIndexRouteImport.update({
   id: '/join/',
   path: '/join/',
@@ -106,10 +119,122 @@ const JoinTrainerRoute = JoinTrainerRouteImport.update({
   path: '/join/trainer',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminAiRoute = AuthenticatedAdminAiRouteImport.update({
+  id: '/admin/ai',
+  path: '/admin/ai',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAdminAnalyticsRoute =
+  AuthenticatedAdminAnalyticsRouteImport.update({
+    id: '/admin/analytics',
+    path: '/admin/analytics',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAdminApprovalsRoute =
   AuthenticatedAdminApprovalsRouteImport.update({
     id: '/admin/approvals',
     path: '/admin/approvals',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminBookingsRoute =
+  AuthenticatedAdminBookingsRouteImport.update({
+    id: '/admin/bookings',
+    path: '/admin/bookings',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminClassesRoute =
+  AuthenticatedAdminClassesRouteImport.update({
+    id: '/admin/classes',
+    path: '/admin/classes',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminContentRoute =
+  AuthenticatedAdminContentRouteImport.update({
+    id: '/admin/content',
+    path: '/admin/content',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminEquipmentRoute =
+  AuthenticatedAdminEquipmentRouteImport.update({
+    id: '/admin/equipment',
+    path: '/admin/equipment',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminExercisesRoute =
+  AuthenticatedAdminExercisesRouteImport.update({
+    id: '/admin/exercises',
+    path: '/admin/exercises',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminMembersRoute =
+  AuthenticatedAdminMembersRouteImport.update({
+    id: '/admin/members',
+    path: '/admin/members',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminMembershipsRoute =
+  AuthenticatedAdminMembershipsRouteImport.update({
+    id: '/admin/memberships',
+    path: '/admin/memberships',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminSettingsRoute =
+  AuthenticatedAdminSettingsRouteImport.update({
+    id: '/admin/settings',
+    path: '/admin/settings',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminTrainersRoute =
+  AuthenticatedAdminTrainersRouteImport.update({
+    id: '/admin/trainers',
+    path: '/admin/trainers',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedTrainerIndexRoute =
+  AuthenticatedTrainerIndexRouteImport.update({
+    id: '/trainer/',
+    path: '/trainer/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedTrainerAttendanceRoute =
+  AuthenticatedTrainerAttendanceRouteImport.update({
+    id: '/trainer/attendance',
+    path: '/trainer/attendance',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedTrainerClassesRoute =
+  AuthenticatedTrainerClassesRouteImport.update({
+    id: '/trainer/classes',
+    path: '/trainer/classes',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedTrainerMembersRoute =
+  AuthenticatedTrainerMembersRouteImport.update({
+    id: '/trainer/members',
+    path: '/trainer/members',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedTrainerMessagesRoute =
+  AuthenticatedTrainerMessagesRouteImport.update({
+    id: '/trainer/messages',
+    path: '/trainer/messages',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedTrainerPlansRoute =
+  AuthenticatedTrainerPlansRouteImport.update({
+    id: '/trainer/plans',
+    path: '/trainer/plans',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedTrainerProfileRoute =
+  AuthenticatedTrainerProfileRouteImport.update({
+    id: '/trainer/profile',
+    path: '/trainer/profile',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
@@ -125,11 +250,29 @@ export interface FileRoutesByFullPath {
   '/status': typeof StatusRoute
   '/trainers': typeof TrainersRoute
   '/member': typeof AuthenticatedMemberRoute
-  '/trainer': typeof AuthenticatedTrainerRoute
   '/join/member': typeof JoinMemberRoute
   '/join/trainer': typeof JoinTrainerRoute
   '/join/': typeof JoinIndexRoute
+  '/admin/ai': typeof AuthenticatedAdminAiRoute
+  '/admin/analytics': typeof AuthenticatedAdminAnalyticsRoute
   '/admin/approvals': typeof AuthenticatedAdminApprovalsRoute
+  '/admin/bookings': typeof AuthenticatedAdminBookingsRoute
+  '/admin/classes': typeof AuthenticatedAdminClassesRoute
+  '/admin/content': typeof AuthenticatedAdminContentRoute
+  '/admin/equipment': typeof AuthenticatedAdminEquipmentRoute
+  '/admin/exercises': typeof AuthenticatedAdminExercisesRoute
+  '/admin/members': typeof AuthenticatedAdminMembersRoute
+  '/admin/memberships': typeof AuthenticatedAdminMembershipsRoute
+  '/admin/settings': typeof AuthenticatedAdminSettingsRoute
+  '/admin/trainers': typeof AuthenticatedAdminTrainersRoute
+  '/trainer/attendance': typeof AuthenticatedTrainerAttendanceRoute
+  '/trainer/classes': typeof AuthenticatedTrainerClassesRoute
+  '/trainer/members': typeof AuthenticatedTrainerMembersRoute
+  '/trainer/messages': typeof AuthenticatedTrainerMessagesRoute
+  '/trainer/plans': typeof AuthenticatedTrainerPlansRoute
+  '/trainer/profile': typeof AuthenticatedTrainerProfileRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/trainer/': typeof AuthenticatedTrainerIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -143,11 +286,29 @@ export interface FileRoutesByTo {
   '/status': typeof StatusRoute
   '/trainers': typeof TrainersRoute
   '/member': typeof AuthenticatedMemberRoute
-  '/trainer': typeof AuthenticatedTrainerRoute
   '/join/member': typeof JoinMemberRoute
   '/join/trainer': typeof JoinTrainerRoute
   '/join': typeof JoinIndexRoute
+  '/admin/ai': typeof AuthenticatedAdminAiRoute
+  '/admin/analytics': typeof AuthenticatedAdminAnalyticsRoute
   '/admin/approvals': typeof AuthenticatedAdminApprovalsRoute
+  '/admin/bookings': typeof AuthenticatedAdminBookingsRoute
+  '/admin/classes': typeof AuthenticatedAdminClassesRoute
+  '/admin/content': typeof AuthenticatedAdminContentRoute
+  '/admin/equipment': typeof AuthenticatedAdminEquipmentRoute
+  '/admin/exercises': typeof AuthenticatedAdminExercisesRoute
+  '/admin/members': typeof AuthenticatedAdminMembersRoute
+  '/admin/memberships': typeof AuthenticatedAdminMembershipsRoute
+  '/admin/settings': typeof AuthenticatedAdminSettingsRoute
+  '/admin/trainers': typeof AuthenticatedAdminTrainersRoute
+  '/trainer/attendance': typeof AuthenticatedTrainerAttendanceRoute
+  '/trainer/classes': typeof AuthenticatedTrainerClassesRoute
+  '/trainer/members': typeof AuthenticatedTrainerMembersRoute
+  '/trainer/messages': typeof AuthenticatedTrainerMessagesRoute
+  '/trainer/plans': typeof AuthenticatedTrainerPlansRoute
+  '/trainer/profile': typeof AuthenticatedTrainerProfileRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
+  '/trainer': typeof AuthenticatedTrainerIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -163,11 +324,29 @@ export interface FileRoutesById {
   '/status': typeof StatusRoute
   '/trainers': typeof TrainersRoute
   '/_authenticated/member': typeof AuthenticatedMemberRoute
-  '/_authenticated/trainer': typeof AuthenticatedTrainerRoute
   '/join/member': typeof JoinMemberRoute
   '/join/trainer': typeof JoinTrainerRoute
   '/join/': typeof JoinIndexRoute
+  '/_authenticated/admin/ai': typeof AuthenticatedAdminAiRoute
+  '/_authenticated/admin/analytics': typeof AuthenticatedAdminAnalyticsRoute
   '/_authenticated/admin/approvals': typeof AuthenticatedAdminApprovalsRoute
+  '/_authenticated/admin/bookings': typeof AuthenticatedAdminBookingsRoute
+  '/_authenticated/admin/classes': typeof AuthenticatedAdminClassesRoute
+  '/_authenticated/admin/content': typeof AuthenticatedAdminContentRoute
+  '/_authenticated/admin/equipment': typeof AuthenticatedAdminEquipmentRoute
+  '/_authenticated/admin/exercises': typeof AuthenticatedAdminExercisesRoute
+  '/_authenticated/admin/members': typeof AuthenticatedAdminMembersRoute
+  '/_authenticated/admin/memberships': typeof AuthenticatedAdminMembershipsRoute
+  '/_authenticated/admin/settings': typeof AuthenticatedAdminSettingsRoute
+  '/_authenticated/admin/trainers': typeof AuthenticatedAdminTrainersRoute
+  '/_authenticated/trainer/attendance': typeof AuthenticatedTrainerAttendanceRoute
+  '/_authenticated/trainer/classes': typeof AuthenticatedTrainerClassesRoute
+  '/_authenticated/trainer/members': typeof AuthenticatedTrainerMembersRoute
+  '/_authenticated/trainer/messages': typeof AuthenticatedTrainerMessagesRoute
+  '/_authenticated/trainer/plans': typeof AuthenticatedTrainerPlansRoute
+  '/_authenticated/trainer/profile': typeof AuthenticatedTrainerProfileRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/trainer/': typeof AuthenticatedTrainerIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -183,11 +362,29 @@ export interface FileRouteTypes {
     | '/status'
     | '/trainers'
     | '/member'
-    | '/trainer'
     | '/join/member'
     | '/join/trainer'
     | '/join/'
+    | '/admin/ai'
+    | '/admin/analytics'
     | '/admin/approvals'
+    | '/admin/bookings'
+    | '/admin/classes'
+    | '/admin/content'
+    | '/admin/equipment'
+    | '/admin/exercises'
+    | '/admin/members'
+    | '/admin/memberships'
+    | '/admin/settings'
+    | '/admin/trainers'
+    | '/trainer/attendance'
+    | '/trainer/classes'
+    | '/trainer/members'
+    | '/trainer/messages'
+    | '/trainer/plans'
+    | '/trainer/profile'
+    | '/admin/'
+    | '/trainer/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -201,11 +398,29 @@ export interface FileRouteTypes {
     | '/status'
     | '/trainers'
     | '/member'
-    | '/trainer'
     | '/join/member'
     | '/join/trainer'
     | '/join'
+    | '/admin/ai'
+    | '/admin/analytics'
     | '/admin/approvals'
+    | '/admin/bookings'
+    | '/admin/classes'
+    | '/admin/content'
+    | '/admin/equipment'
+    | '/admin/exercises'
+    | '/admin/members'
+    | '/admin/memberships'
+    | '/admin/settings'
+    | '/admin/trainers'
+    | '/trainer/attendance'
+    | '/trainer/classes'
+    | '/trainer/members'
+    | '/trainer/messages'
+    | '/trainer/plans'
+    | '/trainer/profile'
+    | '/admin'
+    | '/trainer'
   id:
     | '__root__'
     | '/'
@@ -220,11 +435,29 @@ export interface FileRouteTypes {
     | '/status'
     | '/trainers'
     | '/_authenticated/member'
-    | '/_authenticated/trainer'
     | '/join/member'
     | '/join/trainer'
     | '/join/'
+    | '/_authenticated/admin/ai'
+    | '/_authenticated/admin/analytics'
     | '/_authenticated/admin/approvals'
+    | '/_authenticated/admin/bookings'
+    | '/_authenticated/admin/classes'
+    | '/_authenticated/admin/content'
+    | '/_authenticated/admin/equipment'
+    | '/_authenticated/admin/exercises'
+    | '/_authenticated/admin/members'
+    | '/_authenticated/admin/memberships'
+    | '/_authenticated/admin/settings'
+    | '/_authenticated/admin/trainers'
+    | '/_authenticated/trainer/attendance'
+    | '/_authenticated/trainer/classes'
+    | '/_authenticated/trainer/members'
+    | '/_authenticated/trainer/messages'
+    | '/_authenticated/trainer/plans'
+    | '/_authenticated/trainer/profile'
+    | '/_authenticated/admin/'
+    | '/_authenticated/trainer/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -330,13 +563,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMemberRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/trainer': {
-      id: '/_authenticated/trainer'
-      path: '/trainer'
-      fullPath: '/trainer'
-      preLoaderRoute: typeof AuthenticatedTrainerRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/join/': {
       id: '/join/'
       path: '/join'
@@ -358,6 +584,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JoinTrainerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/ai': {
+      id: '/_authenticated/admin/ai'
+      path: '/admin/ai'
+      fullPath: '/admin/ai'
+      preLoaderRoute: typeof AuthenticatedAdminAiRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/analytics': {
+      id: '/_authenticated/admin/analytics'
+      path: '/admin/analytics'
+      fullPath: '/admin/analytics'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin/approvals': {
       id: '/_authenticated/admin/approvals'
       path: '/admin/approvals'
@@ -365,19 +612,167 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminApprovalsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/bookings': {
+      id: '/_authenticated/admin/bookings'
+      path: '/admin/bookings'
+      fullPath: '/admin/bookings'
+      preLoaderRoute: typeof AuthenticatedAdminBookingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/classes': {
+      id: '/_authenticated/admin/classes'
+      path: '/admin/classes'
+      fullPath: '/admin/classes'
+      preLoaderRoute: typeof AuthenticatedAdminClassesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/content': {
+      id: '/_authenticated/admin/content'
+      path: '/admin/content'
+      fullPath: '/admin/content'
+      preLoaderRoute: typeof AuthenticatedAdminContentRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/equipment': {
+      id: '/_authenticated/admin/equipment'
+      path: '/admin/equipment'
+      fullPath: '/admin/equipment'
+      preLoaderRoute: typeof AuthenticatedAdminEquipmentRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/exercises': {
+      id: '/_authenticated/admin/exercises'
+      path: '/admin/exercises'
+      fullPath: '/admin/exercises'
+      preLoaderRoute: typeof AuthenticatedAdminExercisesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/members': {
+      id: '/_authenticated/admin/members'
+      path: '/admin/members'
+      fullPath: '/admin/members'
+      preLoaderRoute: typeof AuthenticatedAdminMembersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/memberships': {
+      id: '/_authenticated/admin/memberships'
+      path: '/admin/memberships'
+      fullPath: '/admin/memberships'
+      preLoaderRoute: typeof AuthenticatedAdminMembershipsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/settings': {
+      id: '/_authenticated/admin/settings'
+      path: '/admin/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AuthenticatedAdminSettingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/trainers': {
+      id: '/_authenticated/admin/trainers'
+      path: '/admin/trainers'
+      fullPath: '/admin/trainers'
+      preLoaderRoute: typeof AuthenticatedAdminTrainersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/trainer/': {
+      id: '/_authenticated/trainer/'
+      path: '/trainer'
+      fullPath: '/trainer/'
+      preLoaderRoute: typeof AuthenticatedTrainerIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/trainer/attendance': {
+      id: '/_authenticated/trainer/attendance'
+      path: '/trainer/attendance'
+      fullPath: '/trainer/attendance'
+      preLoaderRoute: typeof AuthenticatedTrainerAttendanceRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/trainer/classes': {
+      id: '/_authenticated/trainer/classes'
+      path: '/trainer/classes'
+      fullPath: '/trainer/classes'
+      preLoaderRoute: typeof AuthenticatedTrainerClassesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/trainer/members': {
+      id: '/_authenticated/trainer/members'
+      path: '/trainer/members'
+      fullPath: '/trainer/members'
+      preLoaderRoute: typeof AuthenticatedTrainerMembersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/trainer/messages': {
+      id: '/_authenticated/trainer/messages'
+      path: '/trainer/messages'
+      fullPath: '/trainer/messages'
+      preLoaderRoute: typeof AuthenticatedTrainerMessagesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/trainer/plans': {
+      id: '/_authenticated/trainer/plans'
+      path: '/trainer/plans'
+      fullPath: '/trainer/plans'
+      preLoaderRoute: typeof AuthenticatedTrainerPlansRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/trainer/profile': {
+      id: '/_authenticated/trainer/profile'
+      path: '/trainer/profile'
+      fullPath: '/trainer/profile'
+      preLoaderRoute: typeof AuthenticatedTrainerProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedMemberRoute: typeof AuthenticatedMemberRoute
-  AuthenticatedTrainerRoute: typeof AuthenticatedTrainerRoute
+  AuthenticatedAdminAiRoute: typeof AuthenticatedAdminAiRoute
+  AuthenticatedAdminAnalyticsRoute: typeof AuthenticatedAdminAnalyticsRoute
   AuthenticatedAdminApprovalsRoute: typeof AuthenticatedAdminApprovalsRoute
+  AuthenticatedAdminBookingsRoute: typeof AuthenticatedAdminBookingsRoute
+  AuthenticatedAdminClassesRoute: typeof AuthenticatedAdminClassesRoute
+  AuthenticatedAdminContentRoute: typeof AuthenticatedAdminContentRoute
+  AuthenticatedAdminEquipmentRoute: typeof AuthenticatedAdminEquipmentRoute
+  AuthenticatedAdminExercisesRoute: typeof AuthenticatedAdminExercisesRoute
+  AuthenticatedAdminMembersRoute: typeof AuthenticatedAdminMembersRoute
+  AuthenticatedAdminMembershipsRoute: typeof AuthenticatedAdminMembershipsRoute
+  AuthenticatedAdminSettingsRoute: typeof AuthenticatedAdminSettingsRoute
+  AuthenticatedAdminTrainersRoute: typeof AuthenticatedAdminTrainersRoute
+  AuthenticatedTrainerAttendanceRoute: typeof AuthenticatedTrainerAttendanceRoute
+  AuthenticatedTrainerClassesRoute: typeof AuthenticatedTrainerClassesRoute
+  AuthenticatedTrainerMembersRoute: typeof AuthenticatedTrainerMembersRoute
+  AuthenticatedTrainerMessagesRoute: typeof AuthenticatedTrainerMessagesRoute
+  AuthenticatedTrainerPlansRoute: typeof AuthenticatedTrainerPlansRoute
+  AuthenticatedTrainerProfileRoute: typeof AuthenticatedTrainerProfileRoute
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedTrainerIndexRoute: typeof AuthenticatedTrainerIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedMemberRoute: AuthenticatedMemberRoute,
-  AuthenticatedTrainerRoute: AuthenticatedTrainerRoute,
+  AuthenticatedAdminAiRoute: AuthenticatedAdminAiRoute,
+  AuthenticatedAdminAnalyticsRoute: AuthenticatedAdminAnalyticsRoute,
   AuthenticatedAdminApprovalsRoute: AuthenticatedAdminApprovalsRoute,
+  AuthenticatedAdminBookingsRoute: AuthenticatedAdminBookingsRoute,
+  AuthenticatedAdminClassesRoute: AuthenticatedAdminClassesRoute,
+  AuthenticatedAdminContentRoute: AuthenticatedAdminContentRoute,
+  AuthenticatedAdminEquipmentRoute: AuthenticatedAdminEquipmentRoute,
+  AuthenticatedAdminExercisesRoute: AuthenticatedAdminExercisesRoute,
+  AuthenticatedAdminMembersRoute: AuthenticatedAdminMembersRoute,
+  AuthenticatedAdminMembershipsRoute: AuthenticatedAdminMembershipsRoute,
+  AuthenticatedAdminSettingsRoute: AuthenticatedAdminSettingsRoute,
+  AuthenticatedAdminTrainersRoute: AuthenticatedAdminTrainersRoute,
+  AuthenticatedTrainerAttendanceRoute: AuthenticatedTrainerAttendanceRoute,
+  AuthenticatedTrainerClassesRoute: AuthenticatedTrainerClassesRoute,
+  AuthenticatedTrainerMembersRoute: AuthenticatedTrainerMembersRoute,
+  AuthenticatedTrainerMessagesRoute: AuthenticatedTrainerMessagesRoute,
+  AuthenticatedTrainerPlansRoute: AuthenticatedTrainerPlansRoute,
+  AuthenticatedTrainerProfileRoute: AuthenticatedTrainerProfileRoute,
+  AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+  AuthenticatedTrainerIndexRoute: AuthenticatedTrainerIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
