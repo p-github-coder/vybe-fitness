@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import type { ReactNode } from "react";
 
+import { AdminGate } from "@/components/site/AdminGate";
 import { RoleGate } from "@/components/site/RoleGate";
 import { DashboardShell, type NavItem } from "@/components/dashboard/DashboardShell";
 
@@ -57,11 +58,11 @@ export function AdminPage({
   children: ReactNode;
 }) {
   return (
-    <RoleGate role="admin">
+    <AdminGate>
       <DashboardShell nav={adminNav} area="Admin console" title={title} description={description} actions={actions}>
         {children}
       </DashboardShell>
-    </RoleGate>
+    </AdminGate>
   );
 }
 
