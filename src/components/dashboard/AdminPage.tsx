@@ -26,6 +26,7 @@ export const adminNav: NavItem[] = [
   { to: "/admin/trainers", label: "Trainers", icon: UserCog },
   { to: "/admin/classes", label: "Classes", icon: CalendarCheck },
   { to: "/admin/bookings", label: "Bookings", icon: ListChecks },
+  { to: "/admin/attendance", label: "Attendance", icon: CalendarCheck },
   { to: "/admin/memberships", label: "Memberships", icon: CreditCard },
   { to: "/admin/equipment", label: "Equipment", icon: Dumbbell },
   { to: "/admin/exercises", label: "Exercises", icon: Activity },
