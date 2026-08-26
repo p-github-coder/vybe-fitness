@@ -94,11 +94,12 @@ function AuthPage() {
           <h1 className="text-display text-3xl">Welcome back</h1>
           <p className="mt-2 text-sm text-muted-foreground">Sign in to continue your training.</p>
 
-          <form className="mt-7 space-y-5" onSubmit={handleSubmit} noValidate>
+          <form className="mt-7 space-y-5" onSubmit={handleSubmit} noValidate name="vybe-member-login">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="member-login-email">Email</Label>
               <Input
-                id="email"
+                id="member-login-email"
+                name="member-login-email"
                 type="email"
                 autoComplete="email"
                 value={email}
@@ -108,13 +109,14 @@ function AuthPage() {
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="member-login-password">Password</Label>
                 <Link to="/forgot-password" className="text-xs text-primary hover:underline">
                   Forgot password?
                 </Link>
               </div>
               <Input
-                id="password"
+                id="member-login-password"
+                name="member-login-password"
                 type="password"
                 autoComplete="current-password"
                 value={password}

@@ -100,13 +100,14 @@ function AdminLogin() {
             Restricted area. Authorised VYBE Fitness staff only.
           </p>
 
-          <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+          <form onSubmit={handleSubmit} className="mt-8 space-y-5" name="vybe-admin-login" autoComplete="on">
             <div className="space-y-2">
               <Label htmlFor="admin-email">Email</Label>
               <Input
                 id="admin-email"
+                name="admin-email"
                 type="email"
-                autoComplete="username"
+                autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@vybefitness.com"
@@ -118,6 +119,7 @@ function AdminLogin() {
               <Label htmlFor="admin-password">Password</Label>
               <Input
                 id="admin-password"
+                name="admin-password"
                 type="password"
                 autoComplete="current-password"
                 value={password}

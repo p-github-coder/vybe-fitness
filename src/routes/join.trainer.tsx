@@ -139,36 +139,38 @@ function TrainerSignup() {
           <div>
             <h2 className="text-eyebrow">Your details</h2>
             <div className="mt-5 grid gap-5 sm:grid-cols-2">
-              <FormField label="First name" id="first_name" error={errors["first_name"]}>
-                <Input id="first_name" value={values.first_name} onChange={(e) => set("first_name", e.target.value)} />
+              <FormField label="First name" id="trainer_first_name" error={errors["first_name"]}>
+                <Input id="trainer_first_name" name="trainer_first_name" autoComplete="given-name" value={values.first_name} onChange={(e) => set("first_name", e.target.value)} />
               </FormField>
-              <FormField label="Last name" id="last_name" error={errors["last_name"]}>
-                <Input id="last_name" value={values.last_name} onChange={(e) => set("last_name", e.target.value)} />
+              <FormField label="Last name" id="trainer_last_name" error={errors["last_name"]}>
+                <Input id="trainer_last_name" name="trainer_last_name" autoComplete="family-name" value={values.last_name} onChange={(e) => set("last_name", e.target.value)} />
               </FormField>
-              <FormField label="Username" id="username" error={errors["username"]}>
-                <Input id="username" value={values.username} onChange={(e) => set("username", e.target.value)} />
+              <FormField label="Username" id="trainer_username" error={errors["username"]}>
+                <Input id="trainer_username" name="trainer_username" autoComplete="off" value={values.username} onChange={(e) => set("username", e.target.value)} />
               </FormField>
-              <FormField label="Email" id="email" error={errors["email"]}>
-                <Input id="email" type="email" value={values.email} onChange={(e) => set("email", e.target.value)} />
+              <FormField label="Email" id="trainer_email" error={errors["email"]}>
+                <Input id="trainer_email" name="trainer_email" type="email" autoComplete="email" value={values.email} onChange={(e) => set("email", e.target.value)} />
               </FormField>
-              <FormField label="Phone" id="phone" error={errors["phone"]}>
-                <Input id="phone" value={values.phone} onChange={(e) => set("phone", e.target.value)} />
+              <FormField label="Phone" id="trainer_phone" error={errors["phone"]}>
+                <Input id="trainer_phone" name="trainer_phone" type="tel" autoComplete="tel" value={values.phone} onChange={(e) => set("phone", e.target.value)} />
               </FormField>
-              <FormField label="Age" id="age" error={errors["age"]}>
-                <Input id="age" inputMode="numeric" value={values.age} onChange={(e) => set("age", e.target.value)} />
+              <FormField label="Age" id="trainer_age" error={errors["age"]}>
+                <Input id="trainer_age" name="trainer_age" inputMode="numeric" autoComplete="off" value={values.age} onChange={(e) => set("age", e.target.value)} />
               </FormField>
-              <FormField label="Password" id="password" error={errors["password"]}>
+              <FormField label="Password" id="trainer_password" error={errors["password"]}>
                 <Input
-                  id="password"
+                  id="trainer_password"
+                  name="trainer_password"
                   type="password"
                   autoComplete="new-password"
                   value={values.password}
                   onChange={(e) => set("password", e.target.value)}
                 />
               </FormField>
-              <FormField label="Confirm password" id="confirm_password" error={errors["confirm_password"]}>
+              <FormField label="Confirm password" id="trainer_confirm_password" error={errors["confirm_password"]}>
                 <Input
-                  id="confirm_password"
+                  id="trainer_confirm_password"
+                  name="trainer_confirm_password"
                   type="password"
                   autoComplete="new-password"
                   value={values.confirm_password}
