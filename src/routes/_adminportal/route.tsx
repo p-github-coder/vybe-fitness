@@ -1,13 +1,19 @@
-import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
 
-import { adminSupabase } from "@/integrations/supabase/admin-client";
+import { AdminGate } from "@/components/site/AdminGate";
+import { AdminAuthProvider } from "@/lib/admin-auth";
 
 export const Route = createFileRoute("/_adminportal")({
   ssr: false,
-  beforeLoad: async () => {
-    const { data, error } = await adminSupabase.auth.getUser();
-    if (error || !data.user) throw redirect({ to: "/admin/login" });
-    return { user: data.user };
-  },
-  component: () => <Outlet />,
+  component: AdminPortalRoot,
 });
+
+function AdminPortalRoot() {
+  return (
+    <AdminAuthProvider>
+      <AdminGate>
+        <Outlet />
+      </AdminGate>
+    </AdminAuthProvider>
+  );
+}

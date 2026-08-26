@@ -1,7 +1,7 @@
 import { useNavigate } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
-import { useAccount } from "@/lib/auth";
+import { useAdminAuth } from "@/lib/admin-auth";
 
 /**
  * UI-level gate for the standalone admin portal. Anyone who is not an
@@ -10,9 +10,9 @@ import { useAccount } from "@/lib/auth";
  * functions behind every privileged action.
  */
 export function AdminGate({ children }: { children: ReactNode }) {
-  const { loading, session, hasRole } = useAccount();
+  const { loading, session, authorized } = useAdminAuth();
   const navigate = useNavigate();
-  const allowed = !!session && hasRole("admin");
+  const allowed = !!session && authorized;
 
   useEffect(() => {
     if (loading) return;

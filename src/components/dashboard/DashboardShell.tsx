@@ -5,7 +5,9 @@ import { useState, type ComponentType, type ReactNode } from "react";
 
 import { Logo } from "@/components/site/Logo";
 import { Button } from "@/components/ui/button";
+import { adminSupabase } from "@/integrations/supabase/admin-client";
 import { supabase } from "@/integrations/supabase/client";
+import { useAdminAuth } from "@/lib/admin-auth";
 import { displayName, useAccount } from "@/lib/auth";
 import { cn } from "@/lib/utils";
 
@@ -23,6 +25,7 @@ export function DashboardShell({
   description,
   actions,
   children,
+  authArea,
 }: {
   nav: NavItem[];
   area: string;
@@ -30,16 +33,24 @@ export function DashboardShell({
   description?: string | undefined;
   actions?: ReactNode | undefined;
   children: ReactNode;
+  authArea: "admin" | "public";
 }) {
   const [open, setOpen] = useState(false);
-  const { profile } = useAccount();
+  const publicAccount = useAccount();
+  const adminAccount = useAdminAuth();
+  const profile = authArea === "admin" ? adminAccount.profile : publicAccount.profile;
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   async function handleSignOut() {
     await queryClient.cancelQueries();
     queryClient.clear();
-    await supabase.auth.signOut();
+    if (authArea === "admin") {
+      await adminSupabase.auth.signOut({ scope: "local" });
+      navigate({ to: "/admin/login", replace: true });
+      return;
+    }
+    await supabase.auth.signOut({ scope: "local" });
     navigate({ to: "/auth", replace: true });
   }
 

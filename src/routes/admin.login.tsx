@@ -9,7 +9,7 @@ import { Logo } from "@/components/site/Logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { supabase } from "@/integrations/supabase/client";
+import { adminSupabase } from "@/integrations/supabase/admin-client";
 
 export const Route = createFileRoute("/admin/login")({
   head: () => ({
@@ -54,7 +54,7 @@ function AdminLogin() {
     setErrors({});
     setSubmitting(true);
 
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await adminSupabase.auth.signInWithPassword({
       email: parsed.data.email,
       password: parsed.data.password,
     });
@@ -66,13 +66,13 @@ function AdminLogin() {
     }
 
     // Server-side source of truth: the role row is protected by row level security.
-    const { data: isAdmin } = await supabase.rpc("has_role", {
+    const { data: isAdmin } = await adminSupabase.rpc("has_role", {
       _user_id: data.user.id,
       _role: "admin",
     });
 
     if (!isAdmin) {
-      await supabase.auth.signOut();
+      await adminSupabase.auth.signOut({ scope: "local" });
       setSubmitting(false);
       toast.error("This account does not have administrator access.");
       return;
