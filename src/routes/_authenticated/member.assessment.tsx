@@ -3,7 +3,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
-import { MemberShell } from "@/components/member/MemberShell";
+import { Chip, MemberShell } from "@/components/member/MemberShell";
 import { RoleGate } from "@/components/site/RoleGate";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -37,31 +37,6 @@ export const Route = createFileRoute("/_authenticated/member/assessment")({
     </RoleGate>
   ),
 });
-
-export function Chip({
-  label,
-  active,
-  onClick,
-}: {
-  label: string;
-  active: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={cn(
-        "rounded-full border px-4 py-2 text-sm transition-colors",
-        active
-          ? "border-primary bg-primary/15 text-primary"
-          : "border-border text-muted-foreground hover:text-foreground",
-      )}
-    >
-      {label}
-    </button>
-  );
-}
 
 const STEPS = ["Body", "Level", "Goals", "Focus", "Preferences"] as const;
 

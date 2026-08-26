@@ -3,9 +3,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
-import { MemberShell } from "@/components/member/MemberShell";
+import { Chip, MemberShell } from "@/components/member/MemberShell";
 import { RoleGate } from "@/components/site/RoleGate";
-import { Chip } from "@/routes/_authenticated/member.assessment";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

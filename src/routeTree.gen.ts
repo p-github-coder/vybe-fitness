@@ -41,6 +41,10 @@ import { Route as AdminportalAdminMembershipsRouteImport } from './routes/_admin
 import { Route as AdminportalAdminSettingsRouteImport } from './routes/_adminportal/admin.settings'
 import { Route as AdminportalAdminTrainersRouteImport } from './routes/_adminportal/admin.trainers'
 import { Route as AuthenticatedMemberIndexRouteImport } from './routes/_authenticated/member.index'
+import { Route as AuthenticatedMemberAssessmentRouteImport } from './routes/_authenticated/member.assessment'
+import { Route as AuthenticatedMemberPlanRouteImport } from './routes/_authenticated/member.plan'
+import { Route as AuthenticatedMemberProfileRouteImport } from './routes/_authenticated/member.profile'
+import { Route as AuthenticatedMemberProgressRouteImport } from './routes/_authenticated/member.progress'
 import { Route as AuthenticatedTrainerIndexRouteImport } from './routes/_authenticated/trainer.index'
 import { Route as AuthenticatedTrainerAttendanceRouteImport } from './routes/_authenticated/trainer.attendance'
 import { Route as AuthenticatedTrainerClassesRouteImport } from './routes/_authenticated/trainer.classes'
@@ -216,6 +220,29 @@ const AuthenticatedMemberIndexRoute =
     path: '/member/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedMemberAssessmentRoute =
+  AuthenticatedMemberAssessmentRouteImport.update({
+    id: '/member/assessment',
+    path: '/member/assessment',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedMemberPlanRoute = AuthenticatedMemberPlanRouteImport.update({
+  id: '/member/plan',
+  path: '/member/plan',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedMemberProfileRoute =
+  AuthenticatedMemberProfileRouteImport.update({
+    id: '/member/profile',
+    path: '/member/profile',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedMemberProgressRoute =
+  AuthenticatedMemberProgressRouteImport.update({
+    id: '/member/progress',
+    path: '/member/progress',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedTrainerIndexRoute =
   AuthenticatedTrainerIndexRouteImport.update({
     id: '/trainer/',
@@ -288,6 +315,10 @@ export interface FileRoutesByFullPath {
   '/admin/memberships': typeof AdminportalAdminMembershipsRoute
   '/admin/settings': typeof AdminportalAdminSettingsRoute
   '/admin/trainers': typeof AdminportalAdminTrainersRoute
+  '/member/assessment': typeof AuthenticatedMemberAssessmentRoute
+  '/member/plan': typeof AuthenticatedMemberPlanRoute
+  '/member/profile': typeof AuthenticatedMemberProfileRoute
+  '/member/progress': typeof AuthenticatedMemberProgressRoute
   '/trainer/attendance': typeof AuthenticatedTrainerAttendanceRoute
   '/trainer/classes': typeof AuthenticatedTrainerClassesRoute
   '/trainer/members': typeof AuthenticatedTrainerMembersRoute
@@ -327,6 +358,10 @@ export interface FileRoutesByTo {
   '/admin/memberships': typeof AdminportalAdminMembershipsRoute
   '/admin/settings': typeof AdminportalAdminSettingsRoute
   '/admin/trainers': typeof AdminportalAdminTrainersRoute
+  '/member/assessment': typeof AuthenticatedMemberAssessmentRoute
+  '/member/plan': typeof AuthenticatedMemberPlanRoute
+  '/member/profile': typeof AuthenticatedMemberProfileRoute
+  '/member/progress': typeof AuthenticatedMemberProgressRoute
   '/trainer/attendance': typeof AuthenticatedTrainerAttendanceRoute
   '/trainer/classes': typeof AuthenticatedTrainerClassesRoute
   '/trainer/members': typeof AuthenticatedTrainerMembersRoute
@@ -369,6 +404,10 @@ export interface FileRoutesById {
   '/_adminportal/admin/memberships': typeof AdminportalAdminMembershipsRoute
   '/_adminportal/admin/settings': typeof AdminportalAdminSettingsRoute
   '/_adminportal/admin/trainers': typeof AdminportalAdminTrainersRoute
+  '/_authenticated/member/assessment': typeof AuthenticatedMemberAssessmentRoute
+  '/_authenticated/member/plan': typeof AuthenticatedMemberPlanRoute
+  '/_authenticated/member/profile': typeof AuthenticatedMemberProfileRoute
+  '/_authenticated/member/progress': typeof AuthenticatedMemberProgressRoute
   '/_authenticated/trainer/attendance': typeof AuthenticatedTrainerAttendanceRoute
   '/_authenticated/trainer/classes': typeof AuthenticatedTrainerClassesRoute
   '/_authenticated/trainer/members': typeof AuthenticatedTrainerMembersRoute
@@ -410,6 +449,10 @@ export interface FileRouteTypes {
     | '/admin/memberships'
     | '/admin/settings'
     | '/admin/trainers'
+    | '/member/assessment'
+    | '/member/plan'
+    | '/member/profile'
+    | '/member/progress'
     | '/trainer/attendance'
     | '/trainer/classes'
     | '/trainer/members'
@@ -449,6 +492,10 @@ export interface FileRouteTypes {
     | '/admin/memberships'
     | '/admin/settings'
     | '/admin/trainers'
+    | '/member/assessment'
+    | '/member/plan'
+    | '/member/profile'
+    | '/member/progress'
     | '/trainer/attendance'
     | '/trainer/classes'
     | '/trainer/members'
@@ -490,6 +537,10 @@ export interface FileRouteTypes {
     | '/_adminportal/admin/memberships'
     | '/_adminportal/admin/settings'
     | '/_adminportal/admin/trainers'
+    | '/_authenticated/member/assessment'
+    | '/_authenticated/member/plan'
+    | '/_authenticated/member/profile'
+    | '/_authenticated/member/progress'
     | '/_authenticated/trainer/attendance'
     | '/_authenticated/trainer/classes'
     | '/_authenticated/trainer/members'
@@ -748,6 +799,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMemberIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/member/assessment': {
+      id: '/_authenticated/member/assessment'
+      path: '/member/assessment'
+      fullPath: '/member/assessment'
+      preLoaderRoute: typeof AuthenticatedMemberAssessmentRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/member/plan': {
+      id: '/_authenticated/member/plan'
+      path: '/member/plan'
+      fullPath: '/member/plan'
+      preLoaderRoute: typeof AuthenticatedMemberPlanRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/member/profile': {
+      id: '/_authenticated/member/profile'
+      path: '/member/profile'
+      fullPath: '/member/profile'
+      preLoaderRoute: typeof AuthenticatedMemberProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/member/progress': {
+      id: '/_authenticated/member/progress'
+      path: '/member/progress'
+      fullPath: '/member/progress'
+      preLoaderRoute: typeof AuthenticatedMemberProgressRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/trainer/': {
       id: '/_authenticated/trainer/'
       path: '/trainer'
@@ -836,6 +915,10 @@ const AdminportalRouteRouteWithChildren =
   AdminportalRouteRoute._addFileChildren(AdminportalRouteRouteChildren)
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedMemberAssessmentRoute: typeof AuthenticatedMemberAssessmentRoute
+  AuthenticatedMemberPlanRoute: typeof AuthenticatedMemberPlanRoute
+  AuthenticatedMemberProfileRoute: typeof AuthenticatedMemberProfileRoute
+  AuthenticatedMemberProgressRoute: typeof AuthenticatedMemberProgressRoute
   AuthenticatedTrainerAttendanceRoute: typeof AuthenticatedTrainerAttendanceRoute
   AuthenticatedTrainerClassesRoute: typeof AuthenticatedTrainerClassesRoute
   AuthenticatedTrainerMembersRoute: typeof AuthenticatedTrainerMembersRoute
@@ -847,6 +930,10 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedMemberAssessmentRoute: AuthenticatedMemberAssessmentRoute,
+  AuthenticatedMemberPlanRoute: AuthenticatedMemberPlanRoute,
+  AuthenticatedMemberProfileRoute: AuthenticatedMemberProfileRoute,
+  AuthenticatedMemberProgressRoute: AuthenticatedMemberProgressRoute,
   AuthenticatedTrainerAttendanceRoute: AuthenticatedTrainerAttendanceRoute,
   AuthenticatedTrainerClassesRoute: AuthenticatedTrainerClassesRoute,
   AuthenticatedTrainerMembersRoute: AuthenticatedTrainerMembersRoute,

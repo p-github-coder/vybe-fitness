@@ -6,6 +6,7 @@ import type { ReactNode } from "react";
 import { Logo } from "@/components/site/Logo";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
+import { cn } from "@/lib/utils";
 
 const memberLinks = [
   { to: "/member", label: "Dashboard", exact: true },
@@ -60,5 +61,22 @@ export function MatchBadge({ score }: { score: number }) {
     <span className="rounded-full bg-primary/15 px-2.5 py-1 text-xs font-semibold text-primary">
       {score}% match
     </span>
+  );
+}
+
+export function Chip({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        "rounded-full border px-4 py-2 text-sm transition-colors",
+        active
+          ? "border-primary bg-primary/15 text-primary"
+          : "border-border text-muted-foreground hover:text-foreground",
+      )}
+    >
+      {label}
+    </button>
   );
 }
