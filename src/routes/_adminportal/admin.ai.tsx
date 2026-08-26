@@ -6,8 +6,8 @@ import { toast } from "sonner";
 import { AdminPage, head } from "@/components/dashboard/AdminPage";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { supabase } from "@/integrations/supabase/client";
-import { siteContentQuery } from "@/lib/gym-data";
+import { adminSupabase } from "@/integrations/supabase/admin-client";
+import { siteContentQuery } from "@/lib/admin-data";
 
 export const Route = createFileRoute("/_adminportal/admin/ai")({
   head: head("AI management", "Control the AI-powered features across the platform."),

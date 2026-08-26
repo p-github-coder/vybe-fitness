@@ -1,11 +1,11 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 
-import { supabase } from "@/integrations/supabase/client";
+import { adminSupabase } from "@/integrations/supabase/admin-client";
 
 export const Route = createFileRoute("/_adminportal")({
   ssr: false,
   beforeLoad: async () => {
-    const { data, error } = await supabase.auth.getUser();
+    const { data, error } = await adminSupabase.auth.getUser();
     if (error || !data.user) throw redirect({ to: "/admin/login" });
     return { user: data.user };
   },

@@ -25,7 +25,7 @@ import {
   bookingsQuery,
   profilesQuery,
   userMembershipsQuery,
-} from "@/lib/gym-data";
+} from "@/lib/admin-data";
 import { formatPrice } from "@/lib/site-data";
 
 export const Route = createFileRoute("/_adminportal/admin/analytics")({

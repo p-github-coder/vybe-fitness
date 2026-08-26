@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { AdminPage, head } from "@/components/dashboard/AdminPage";
 import { CrudManager } from "@/components/dashboard/CrudManager";
 import { Badge } from "@/components/ui/badge";
-import { equipmentQuery } from "@/lib/gym-data";
+import { equipmentQuery } from "@/lib/admin-data";
 
 export const Route = createFileRoute("/_adminportal/admin/equipment")({
   head: head("Equipment", "Manage the gym floor equipment catalogue."),

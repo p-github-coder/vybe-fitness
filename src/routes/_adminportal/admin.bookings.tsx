@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { supabase } from "@/integrations/supabase/client";
+import { adminSupabase } from "@/integrations/supabase/admin-client";
 import {
   adminClassesQuery,
   attendanceQuery,
@@ -20,7 +20,7 @@ import {
   upsertRow,
   type AttendanceStatus,
   type BookingStatus,
-} from "@/lib/gym-data";
+} from "@/lib/admin-data";
 
 export const Route = createFileRoute("/_adminportal/admin/bookings")({
   head: head("Bookings", "Track class bookings and attendance across the gym."),
@@ -43,7 +43,7 @@ function BookingsPage() {
 
   const setStatus = useMutation({
     mutationFn: async ({ id, status }: { id: string; status: BookingStatus }) => {
-      const { error } = await supabase.from("bookings").update({ status }).eq("id", id);
+      const { error } = await adminSupabase.from("bookings").update({ status }).eq("id", id);
       if (error) throw error;
     },
     onSuccess: async () => {

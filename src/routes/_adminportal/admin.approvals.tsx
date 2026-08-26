@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { supabase } from "@/integrations/supabase/client";
+import { adminSupabase } from "@/integrations/supabase/admin-client";
 import { useAccount, type AccountStatus, type Profile } from "@/lib/auth";
 
 export const Route = createFileRoute("/_adminportal/admin/approvals")({
@@ -70,7 +70,7 @@ function AdminApprovals() {
             .from("trainer_profiles")
             .select("user_id, years_of_experience, certifications, specialties, areas_of_expertise, profile_image")
             .not("user_id", "is", null),
-          supabase.from("user_roles").select("user_id, role"),
+          adminSupabase.from("user_roles").select("user_id, role"),
         ]);
       if (error) throw error;
       if (tErr) throw tErr;
@@ -99,7 +99,7 @@ function AdminApprovals() {
 
   const action = useMutation({
     mutationFn: async ({ userId, status }: { userId: string; status: AccountStatus }) => {
-      const { error } = await supabase.rpc("admin_set_account_status", {
+      const { error } = await adminSupabase.rpc("admin_set_account_status", {
         _user_id: userId,
         _status: status,
       });
