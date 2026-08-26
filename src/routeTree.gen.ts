@@ -16,6 +16,8 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ClassesRouteImport } from './routes/classes'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as EquipmentRouteImport } from './routes/equipment'
+import { Route as ExercisesRouteImport } from './routes/exercises'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as MembershipRouteImport } from './routes/membership'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
@@ -78,6 +80,16 @@ const ClassesRoute = ClassesRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EquipmentRoute = EquipmentRouteImport.update({
+  id: '/equipment',
+  path: '/equipment',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExercisesRoute = ExercisesRouteImport.update({
+  id: '/exercises',
+  path: '/exercises',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
@@ -253,6 +265,8 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/classes': typeof ClassesRoute
   '/contact': typeof ContactRoute
+  '/equipment': typeof EquipmentRoute
+  '/exercises': typeof ExercisesRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/membership': typeof MembershipRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -290,6 +304,8 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/classes': typeof ClassesRoute
   '/contact': typeof ContactRoute
+  '/equipment': typeof EquipmentRoute
+  '/exercises': typeof ExercisesRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/membership': typeof MembershipRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -330,6 +346,8 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/classes': typeof ClassesRoute
   '/contact': typeof ContactRoute
+  '/equipment': typeof EquipmentRoute
+  '/exercises': typeof ExercisesRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/membership': typeof MembershipRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -369,6 +387,8 @@ export interface FileRouteTypes {
     | '/auth'
     | '/classes'
     | '/contact'
+    | '/equipment'
+    | '/exercises'
     | '/forgot-password'
     | '/membership'
     | '/reset-password'
@@ -406,6 +426,8 @@ export interface FileRouteTypes {
     | '/auth'
     | '/classes'
     | '/contact'
+    | '/equipment'
+    | '/exercises'
     | '/forgot-password'
     | '/membership'
     | '/reset-password'
@@ -445,6 +467,8 @@ export interface FileRouteTypes {
     | '/auth'
     | '/classes'
     | '/contact'
+    | '/equipment'
+    | '/exercises'
     | '/forgot-password'
     | '/membership'
     | '/reset-password'
@@ -485,6 +509,8 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   ClassesRoute: typeof ClassesRoute
   ContactRoute: typeof ContactRoute
+  EquipmentRoute: typeof EquipmentRoute
+  ExercisesRoute: typeof ExercisesRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   MembershipRoute: typeof MembershipRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
@@ -545,6 +571,20 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipment': {
+      id: '/equipment'
+      path: '/equipment'
+      fullPath: '/equipment'
+      preLoaderRoute: typeof EquipmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/exercises': {
+      id: '/exercises'
+      path: '/exercises'
+      fullPath: '/exercises'
+      preLoaderRoute: typeof ExercisesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/forgot-password': {
@@ -828,6 +868,8 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   ClassesRoute: ClassesRoute,
   ContactRoute: ContactRoute,
+  EquipmentRoute: EquipmentRoute,
+  ExercisesRoute: ExercisesRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   MembershipRoute: MembershipRoute,
   ResetPasswordRoute: ResetPasswordRoute,
