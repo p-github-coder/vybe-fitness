@@ -30,7 +30,7 @@ import {
   type WorkoutPlanItem,
 } from "@/lib/gym-data";
 
-export const Route = createFileRoute("/_authenticated/member")({
+export const Route = createFileRoute("/_authenticated/member/")({
   head: () => ({
     meta: [
       { title: "Member Area — VYBE Fitness" },

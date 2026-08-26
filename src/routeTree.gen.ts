@@ -21,7 +21,6 @@ import { Route as MembershipRouteImport } from './routes/membership'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as StatusRouteImport } from './routes/status'
 import { Route as TrainersRouteImport } from './routes/trainers'
-import { Route as AuthenticatedMemberRouteImport } from './routes/_authenticated/member'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as JoinIndexRouteImport } from './routes/join.index'
 import { Route as JoinMemberRouteImport } from './routes/join.member'
@@ -39,6 +38,7 @@ import { Route as AdminportalAdminMembersRouteImport } from './routes/_adminport
 import { Route as AdminportalAdminMembershipsRouteImport } from './routes/_adminportal/admin.memberships'
 import { Route as AdminportalAdminSettingsRouteImport } from './routes/_adminportal/admin.settings'
 import { Route as AdminportalAdminTrainersRouteImport } from './routes/_adminportal/admin.trainers'
+import { Route as AuthenticatedMemberIndexRouteImport } from './routes/_authenticated/member.index'
 import { Route as AuthenticatedTrainerIndexRouteImport } from './routes/_authenticated/trainer.index'
 import { Route as AuthenticatedTrainerAttendanceRouteImport } from './routes/_authenticated/trainer.attendance'
 import { Route as AuthenticatedTrainerClassesRouteImport } from './routes/_authenticated/trainer.classes'
@@ -104,11 +104,6 @@ const TrainersRoute = TrainersRouteImport.update({
   id: '/trainers',
   path: '/trainers',
   getParentRoute: () => rootRouteImport,
-} as any)
-const AuthenticatedMemberRoute = AuthenticatedMemberRouteImport.update({
-  id: '/member',
-  path: '/member',
-  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/admin/login',
@@ -203,6 +198,12 @@ const AdminportalAdminTrainersRoute =
     path: '/admin/trainers',
     getParentRoute: () => AdminportalRouteRoute,
   } as any)
+const AuthenticatedMemberIndexRoute =
+  AuthenticatedMemberIndexRouteImport.update({
+    id: '/member/',
+    path: '/member/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedTrainerIndexRoute =
   AuthenticatedTrainerIndexRouteImport.update({
     id: '/trainer/',
@@ -257,7 +258,6 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/status': typeof StatusRoute
   '/trainers': typeof TrainersRoute
-  '/member': typeof AuthenticatedMemberRoute
   '/admin/login': typeof AdminLoginRoute
   '/join/member': typeof JoinMemberRoute
   '/join/trainer': typeof JoinTrainerRoute
@@ -281,6 +281,7 @@ export interface FileRoutesByFullPath {
   '/trainer/plans': typeof AuthenticatedTrainerPlansRoute
   '/trainer/profile': typeof AuthenticatedTrainerProfileRoute
   '/admin/': typeof AdminportalAdminIndexRoute
+  '/member/': typeof AuthenticatedMemberIndexRoute
   '/trainer/': typeof AuthenticatedTrainerIndexRoute
 }
 export interface FileRoutesByTo {
@@ -294,7 +295,6 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/status': typeof StatusRoute
   '/trainers': typeof TrainersRoute
-  '/member': typeof AuthenticatedMemberRoute
   '/admin/login': typeof AdminLoginRoute
   '/join/member': typeof JoinMemberRoute
   '/join/trainer': typeof JoinTrainerRoute
@@ -318,6 +318,7 @@ export interface FileRoutesByTo {
   '/trainer/plans': typeof AuthenticatedTrainerPlansRoute
   '/trainer/profile': typeof AuthenticatedTrainerProfileRoute
   '/admin': typeof AdminportalAdminIndexRoute
+  '/member': typeof AuthenticatedMemberIndexRoute
   '/trainer': typeof AuthenticatedTrainerIndexRoute
 }
 export interface FileRoutesById {
@@ -334,7 +335,6 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/status': typeof StatusRoute
   '/trainers': typeof TrainersRoute
-  '/_authenticated/member': typeof AuthenticatedMemberRoute
   '/admin/login': typeof AdminLoginRoute
   '/join/member': typeof JoinMemberRoute
   '/join/trainer': typeof JoinTrainerRoute
@@ -358,6 +358,7 @@ export interface FileRoutesById {
   '/_authenticated/trainer/plans': typeof AuthenticatedTrainerPlansRoute
   '/_authenticated/trainer/profile': typeof AuthenticatedTrainerProfileRoute
   '/_adminportal/admin/': typeof AdminportalAdminIndexRoute
+  '/_authenticated/member/': typeof AuthenticatedMemberIndexRoute
   '/_authenticated/trainer/': typeof AuthenticatedTrainerIndexRoute
 }
 export interface FileRouteTypes {
@@ -373,7 +374,6 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/status'
     | '/trainers'
-    | '/member'
     | '/admin/login'
     | '/join/member'
     | '/join/trainer'
@@ -397,6 +397,7 @@ export interface FileRouteTypes {
     | '/trainer/plans'
     | '/trainer/profile'
     | '/admin/'
+    | '/member/'
     | '/trainer/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -410,7 +411,6 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/status'
     | '/trainers'
-    | '/member'
     | '/admin/login'
     | '/join/member'
     | '/join/trainer'
@@ -434,6 +434,7 @@ export interface FileRouteTypes {
     | '/trainer/plans'
     | '/trainer/profile'
     | '/admin'
+    | '/member'
     | '/trainer'
   id:
     | '__root__'
@@ -449,7 +450,6 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/status'
     | '/trainers'
-    | '/_authenticated/member'
     | '/admin/login'
     | '/join/member'
     | '/join/trainer'
@@ -473,6 +473,7 @@ export interface FileRouteTypes {
     | '/_authenticated/trainer/plans'
     | '/_authenticated/trainer/profile'
     | '/_adminportal/admin/'
+    | '/_authenticated/member/'
     | '/_authenticated/trainer/'
   fileRoutesById: FileRoutesById
 }
@@ -580,13 +581,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/trainers'
       preLoaderRoute: typeof TrainersRouteImport
       parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated/member': {
-      id: '/_authenticated/member'
-      path: '/member'
-      fullPath: '/member'
-      preLoaderRoute: typeof AuthenticatedMemberRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/admin/login': {
       id: '/admin/login'
@@ -707,6 +701,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminportalAdminTrainersRouteImport
       parentRoute: typeof AdminportalRouteRoute
     }
+    '/_authenticated/member/': {
+      id: '/_authenticated/member/'
+      path: '/member'
+      fullPath: '/member/'
+      preLoaderRoute: typeof AuthenticatedMemberIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/trainer/': {
       id: '/_authenticated/trainer/'
       path: '/trainer'
@@ -795,24 +796,24 @@ const AdminportalRouteRouteWithChildren =
   AdminportalRouteRoute._addFileChildren(AdminportalRouteRouteChildren)
 
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedMemberRoute: typeof AuthenticatedMemberRoute
   AuthenticatedTrainerAttendanceRoute: typeof AuthenticatedTrainerAttendanceRoute
   AuthenticatedTrainerClassesRoute: typeof AuthenticatedTrainerClassesRoute
   AuthenticatedTrainerMembersRoute: typeof AuthenticatedTrainerMembersRoute
   AuthenticatedTrainerMessagesRoute: typeof AuthenticatedTrainerMessagesRoute
   AuthenticatedTrainerPlansRoute: typeof AuthenticatedTrainerPlansRoute
   AuthenticatedTrainerProfileRoute: typeof AuthenticatedTrainerProfileRoute
+  AuthenticatedMemberIndexRoute: typeof AuthenticatedMemberIndexRoute
   AuthenticatedTrainerIndexRoute: typeof AuthenticatedTrainerIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedMemberRoute: AuthenticatedMemberRoute,
   AuthenticatedTrainerAttendanceRoute: AuthenticatedTrainerAttendanceRoute,
   AuthenticatedTrainerClassesRoute: AuthenticatedTrainerClassesRoute,
   AuthenticatedTrainerMembersRoute: AuthenticatedTrainerMembersRoute,
   AuthenticatedTrainerMessagesRoute: AuthenticatedTrainerMessagesRoute,
   AuthenticatedTrainerPlansRoute: AuthenticatedTrainerPlansRoute,
   AuthenticatedTrainerProfileRoute: AuthenticatedTrainerProfileRoute,
+  AuthenticatedMemberIndexRoute: AuthenticatedMemberIndexRoute,
   AuthenticatedTrainerIndexRoute: AuthenticatedTrainerIndexRoute,
 }
 
