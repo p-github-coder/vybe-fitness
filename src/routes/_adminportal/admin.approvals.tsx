@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { toast } from "sonner";
 
 import { Logo } from "@/components/site/Logo";
@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { adminSupabase } from "@/integrations/supabase/admin-client";
-import { useAccount, type AccountStatus, type Profile } from "@/lib/auth";
+import { type AccountStatus, type Profile } from "@/lib/auth";
 
 export const Route = createFileRoute("/_adminportal/admin/approvals")({
   head: () => ({
@@ -42,22 +42,11 @@ interface ApprovalEvent {
 }
 
 function AdminApprovals() {
-  const { loading, session, hasRole } = useAccount();
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [statusFilter, setStatusFilter] = useState<AccountStatus>("pending");
 
-  const isAdmin = hasRole("admin");
-
-  useEffect(() => {
-    if (loading) return;
-    if (!session) navigate({ to: "/auth", replace: true });
-    else if (!isAdmin) navigate({ to: "/member", replace: true });
-  }, [loading, session, isAdmin, navigate]);
-
   const queue = useQuery({
     queryKey: ["admin-queue", statusFilter],
-    enabled: isAdmin,
     queryFn: async () => {
       const [{ data: profiles, error }, { data: trainers, error: tErr }, { data: roles, error: rErr }] =
         await Promise.all([
@@ -85,7 +74,6 @@ function AdminApprovals() {
 
   const audit = useQuery({
     queryKey: ["approval-events"],
-    enabled: isAdmin,
     queryFn: async () => {
       const { data, error } = await supabase
         .from("approval_events")
@@ -112,14 +100,6 @@ function AdminApprovals() {
     },
     onError: () => toast.error("That action could not be completed. Admin access is required."),
   });
-
-  if (loading || !isAdmin) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-background">
-        <p className="text-sm text-muted-foreground">Checking your access…</p>
-      </div>
-    );
-  }
 
   const roleOf = (userId: string) =>
     queue.data?.roles.find((r) => r.user_id === userId)?.role ?? "member";
