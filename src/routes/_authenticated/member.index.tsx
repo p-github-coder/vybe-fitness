@@ -1,12 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { LogOut } from "lucide-react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
 
 import { StatusBadge } from "@/components/dashboard/CrudManager";
 import { StatCard } from "@/components/dashboard/DashboardShell";
-import { Logo } from "@/components/site/Logo";
+import { MatchBadge, MemberShell } from "@/components/member/MemberShell";
 import { RoleGate } from "@/components/site/RoleGate";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -17,7 +16,17 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 import { displayName, useAccount } from "@/lib/auth";
 import {
+  fitnessEquipmentQuery,
+  fitnessExercisesQuery,
+  fitnessProfileQuery,
+  recommendClasses,
+  recommendEquipment,
+  recommendExercises,
+  recommendTrainers,
+} from "@/lib/fitness";
+import {
   adminClassesQuery,
+  allTrainersQuery,
   allPlansQuery,
   announcementsQuery,
   attendanceQuery,
@@ -65,6 +74,16 @@ function MemberDashboard() {
   const workouts = useQuery(workoutPlansQuery);
   const workoutItems = useQuery(planItemsQuery);
   const announcements = useQuery(announcementsQuery);
+  const trainers = useQuery(allTrainersQuery);
+  const equipmentLib = useQuery(fitnessEquipmentQuery);
+  const exerciseLib = useQuery(fitnessExercisesQuery);
+  const fitness = useQuery(fitnessProfileQuery(userId));
+
+  const fp = fitness.data ?? null;
+  const recEquipment = recommendEquipment(fp, equipmentLib.data ?? []).slice(0, 3);
+  const recExercises = recommendExercises(fp, exerciseLib.data ?? []).slice(0, 4);
+  const recTrainers = recommendTrainers(fp, (trainers.data ?? []) as never).slice(0, 3);
+  const recClasses = recommendClasses(fp, (classes.data ?? []) as never).slice(0, 3);
 
   const [date, setDate] = useState(() => new Date().toISOString().slice(0, 10));
 
@@ -111,16 +130,9 @@ function MemberDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <Logo />
-          <Button variant="secondary" size="sm" onClick={() => void handleSignOut()}>
-            <LogOut className="mr-2 h-4 w-4" /> Log out
-          </Button>
-        </div>
-
-        <p className="text-eyebrow mt-10">Member area</p>
+    <MemberShell>
+      <div>
+        <p className="text-eyebrow">Member area</p>
         <h1 className="text-display mt-3 text-4xl">Welcome back, {displayName(profile)}</h1>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
@@ -130,14 +142,83 @@ function MemberDashboard() {
           <StatCard label="Workout plans" value={myWorkouts.length} />
         </div>
 
-        <Tabs defaultValue="book" className="mt-10">
+        <Tabs defaultValue="foryou" className="mt-10">
           <TabsList>
+            <TabsTrigger value="foryou">For you</TabsTrigger>
             <TabsTrigger value="book">Book a class</TabsTrigger>
             <TabsTrigger value="bookings">My bookings</TabsTrigger>
             <TabsTrigger value="plans">Workout plans</TabsTrigger>
             <TabsTrigger value="attendance">Attendance</TabsTrigger>
             <TabsTrigger value="news">Announcements</TabsTrigger>
           </TabsList>
+
+          <TabsContent value="foryou" className="mt-6 space-y-8">
+            {!fp?.completed && (
+              <div className="surface-card flex flex-wrap items-center justify-between gap-4 p-6">
+                <div>
+                  <h2 className="font-semibold">Unlock your personalised VYBE plan</h2>
+                  <p className="text-sm text-muted-foreground">
+                    Take the 2-minute fitness assessment for tailored equipment, coaches, classes and a weekly plan.
+                  </p>
+                </div>
+                <Button asChild size="sm">
+                  <Link to="/member/assessment">Start assessment</Link>
+                </Button>
+              </div>
+            )}
+
+            <RecSection title="Recommended equipment" href="/equipment">
+              {recEquipment.map((r) => (
+                <RecCard
+                  key={r.item.id}
+                  title={r.item.name}
+                  image={r.item.image}
+                  score={r.score}
+                  reasons={r.reasons}
+                  meta={r.item.target_muscles.slice(0, 3).join(" · ")}
+                />
+              ))}
+            </RecSection>
+
+            <RecSection title="Recommended classes" href="/classes">
+              {recClasses.map((r) => (
+                <RecCard
+                  key={r.item.id}
+                  title={r.item.name}
+                  image={r.item.image}
+                  score={r.score}
+                  reasons={r.reasons}
+                  meta={`${r.item.schedule ?? "Flexible"} · ${r.item.duration_minutes} min`}
+                />
+              ))}
+            </RecSection>
+
+            <RecSection title="Recommended trainers" href="/trainers">
+              {recTrainers.map((r) => (
+                <RecCard
+                  key={r.item.id}
+                  title={r.item.display_name ?? "VYBE coach"}
+                  image={r.item.profile_image}
+                  score={r.score}
+                  reasons={r.reasons}
+                  meta={r.item.specialties.slice(0, 3).join(" · ")}
+                />
+              ))}
+            </RecSection>
+
+            <RecSection title="Recommended exercises" href="/exercises">
+              {recExercises.map((r) => (
+                <RecCard
+                  key={r.item.id}
+                  title={r.item.name}
+                  image={r.item.image}
+                  score={r.score}
+                  reasons={r.reasons}
+                  meta={`${r.item.recommended_reps ?? "3 × 10"} · ${r.item.equipment_name ?? "Bodyweight"}`}
+                />
+              ))}
+            </RecSection>
+          </TabsContent>
 
           <TabsContent value="book" className="mt-6 space-y-5">
             <div className="max-w-xs space-y-2">
@@ -262,6 +343,52 @@ function MemberDashboard() {
           </TabsContent>
         </Tabs>
       </div>
-    </div>
+    </MemberShell>
+  );
+}
+
+function RecSection({ title, href, children }: { title: string; href: string; children: React.ReactNode }) {
+  return (
+    <section>
+      <div className="flex items-center justify-between gap-3">
+        <h2 className="text-lg font-semibold">{title}</h2>
+        <Button asChild variant="ghost" size="sm">
+          <Link to={href}>View all</Link>
+        </Button>
+      </div>
+      <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-3">{children}</div>
+    </section>
+  );
+}
+
+function RecCard({
+  title,
+  image,
+  score,
+  reasons,
+  meta,
+}: {
+  title: string;
+  image: string | null;
+  score: number;
+  reasons: string[];
+  meta?: string;
+}) {
+  return (
+    <article className="surface-card overflow-hidden">
+      {image && <img src={image} alt="" loading="lazy" className="h-32 w-full object-cover" />}
+      <div className="space-y-2 p-5">
+        <div className="flex items-start justify-between gap-2">
+          <h3 className="font-semibold">{title}</h3>
+          <MatchBadge score={score} />
+        </div>
+        {meta && <p className="text-xs text-muted-foreground">{meta}</p>}
+        <ul className="space-y-1 text-xs text-muted-foreground">
+          {reasons.slice(0, 2).map((r) => (
+            <li key={r}>• {r}</li>
+          ))}
+        </ul>
+      </div>
+    </article>
   );
 }
