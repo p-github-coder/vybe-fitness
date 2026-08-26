@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -63,7 +63,6 @@ const planItemsQuery = listQuery<WorkoutPlanItem>("workout_plan_items", {
 
 function MemberDashboard() {
   const { profile, userId } = useAccount();
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const classes = useQuery(adminClassesQuery);
@@ -121,13 +120,6 @@ function MemberDashboard() {
     },
     onError: (e: Error) => toast.error(e.message),
   });
-
-  async function handleSignOut() {
-    await queryClient.cancelQueries();
-    queryClient.clear();
-    await supabase.auth.signOut();
-    navigate({ to: "/auth", replace: true });
-  }
 
   return (
     <MemberShell>
