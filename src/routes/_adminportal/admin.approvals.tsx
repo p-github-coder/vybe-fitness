@@ -50,12 +50,12 @@ function AdminApprovals() {
     queryFn: async () => {
       const [{ data: profiles, error }, { data: trainers, error: tErr }, { data: roles, error: rErr }] =
         await Promise.all([
-          supabase
+          adminSupabase
             .from("profiles")
             .select("*")
             .eq("account_status", statusFilter)
             .order("created_at", { ascending: true }),
-          supabase
+          adminSupabase
             .from("trainer_profiles")
             .select("user_id, years_of_experience, certifications, specialties, areas_of_expertise, profile_image")
             .not("user_id", "is", null),
@@ -75,7 +75,7 @@ function AdminApprovals() {
   const audit = useQuery({
     queryKey: ["approval-events"],
     queryFn: async () => {
-      const { data, error } = await supabase
+      const { data, error } = await adminSupabase
         .from("approval_events")
         .select("id, affected_user, admin_user, action, created_at")
         .order("created_at", { ascending: false })

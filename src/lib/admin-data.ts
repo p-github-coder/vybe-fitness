@@ -46,7 +46,7 @@ export function listQuery<T>(
   return queryOptions({
     queryKey: ["table", table, opts.select ?? "*", opts.orderBy ?? "created_at"],
     queryFn: async (): Promise<T[]> => {
-      const query = supabase
+      const query = adminSupabase
         .from(table as never)
         .select(opts.select ?? "*")
         .order(opts.orderBy ?? "created_at", { ascending: opts.ascending ?? false });
@@ -216,7 +216,7 @@ export const workoutPlansQuery = listQuery<WorkoutPlan>("workout_plans");
 
 export async function upsertRow(table: string, values: Record<string, unknown>, id?: string) {
   if (id) {
-    const { error } = await supabase
+    const { error } = await adminSupabase
       .from(table as never)
       .update(values as never)
       .eq("id", id);
@@ -228,7 +228,7 @@ export async function upsertRow(table: string, values: Record<string, unknown>, 
 }
 
 export async function deleteRow(table: string, id: string) {
-  const { error } = await supabase
+  const { error } = await adminSupabase
     .from(table as never)
     .delete()
     .eq("id", id);

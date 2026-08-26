@@ -29,7 +29,7 @@ function AiPage() {
 
   const setToggle = useMutation({
     mutationFn: async ({ key, label, enabled }: { key: string; label: string; enabled: boolean }) => {
-      const { error } = await supabase
+      const { error } = await adminSupabase
         .from("site_content")
         .upsert({ key, label, value: String(enabled) }, { onConflict: "key" });
       if (error) throw error;
