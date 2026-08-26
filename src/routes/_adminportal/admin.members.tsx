@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { supabase } from "@/integrations/supabase/client";
+import { adminSupabase } from "@/integrations/supabase/admin-client";
 import {
   allPlansQuery,
   attendanceQuery,
@@ -27,7 +27,7 @@ import {
   userMembershipsQuery,
   upsertRow,
   type AdminProfile,
-} from "@/lib/gym-data";
+} from "@/lib/admin-data";
 
 export const Route = createFileRoute("/_adminportal/admin/members")({
   head: head("Members", "Manage every VYBE Fitness member account."),
@@ -100,7 +100,7 @@ function MembersPage() {
 
   const setStatus = useMutation({
     mutationFn: async ({ userId, status }: { userId: string; status: string }) => {
-      const { error } = await supabase.rpc("admin_set_account_status", {
+      const { error } = await adminSupabase.rpc("admin_set_account_status", {
         _user_id: userId,
         _status: status as "pending" | "approved" | "rejected" | "suspended",
       });

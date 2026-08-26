@@ -1,13 +1,25 @@
-import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useState } from "react";
 
-import { supabase } from "@/integrations/supabase/client";
+import { AdminGate } from "@/components/site/AdminGate";
+import { AdminAuthProvider } from "@/lib/admin-auth";
 
 export const Route = createFileRoute("/_adminportal")({
   ssr: false,
-  beforeLoad: async () => {
-    const { data, error } = await supabase.auth.getUser();
-    if (error || !data.user) throw redirect({ to: "/admin/login" });
-    return { user: data.user };
-  },
-  component: () => <Outlet />,
+  component: AdminPortalRoot,
 });
+
+function AdminPortalRoot() {
+  const [adminQueryClient] = useState(() => new QueryClient());
+
+  return (
+    <QueryClientProvider client={adminQueryClient}>
+      <AdminAuthProvider>
+        <AdminGate>
+          <Outlet />
+        </AdminGate>
+      </AdminAuthProvider>
+    </QueryClientProvider>
+  );
+}

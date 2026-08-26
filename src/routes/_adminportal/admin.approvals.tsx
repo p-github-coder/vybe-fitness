@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { toast } from "sonner";
 
 import { Logo } from "@/components/site/Logo";
@@ -8,8 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { supabase } from "@/integrations/supabase/client";
-import { useAccount, type AccountStatus, type Profile } from "@/lib/auth";
+import { adminSupabase } from "@/integrations/supabase/admin-client";
+import { type AccountStatus, type Profile } from "@/lib/auth";
 
 export const Route = createFileRoute("/_adminportal/admin/approvals")({
   head: () => ({
@@ -42,35 +42,24 @@ interface ApprovalEvent {
 }
 
 function AdminApprovals() {
-  const { loading, session, hasRole } = useAccount();
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [statusFilter, setStatusFilter] = useState<AccountStatus>("pending");
 
-  const isAdmin = hasRole("admin");
-
-  useEffect(() => {
-    if (loading) return;
-    if (!session) navigate({ to: "/auth", replace: true });
-    else if (!isAdmin) navigate({ to: "/member", replace: true });
-  }, [loading, session, isAdmin, navigate]);
-
   const queue = useQuery({
     queryKey: ["admin-queue", statusFilter],
-    enabled: isAdmin,
     queryFn: async () => {
       const [{ data: profiles, error }, { data: trainers, error: tErr }, { data: roles, error: rErr }] =
         await Promise.all([
-          supabase
+          adminSupabase
             .from("profiles")
             .select("*")
             .eq("account_status", statusFilter)
             .order("created_at", { ascending: true }),
-          supabase
+          adminSupabase
             .from("trainer_profiles")
             .select("user_id, years_of_experience, certifications, specialties, areas_of_expertise, profile_image")
             .not("user_id", "is", null),
-          supabase.from("user_roles").select("user_id, role"),
+          adminSupabase.from("user_roles").select("user_id, role"),
         ]);
       if (error) throw error;
       if (tErr) throw tErr;
@@ -85,9 +74,8 @@ function AdminApprovals() {
 
   const audit = useQuery({
     queryKey: ["approval-events"],
-    enabled: isAdmin,
     queryFn: async () => {
-      const { data, error } = await supabase
+      const { data, error } = await adminSupabase
         .from("approval_events")
         .select("id, affected_user, admin_user, action, created_at")
         .order("created_at", { ascending: false })
@@ -99,7 +87,7 @@ function AdminApprovals() {
 
   const action = useMutation({
     mutationFn: async ({ userId, status }: { userId: string; status: AccountStatus }) => {
-      const { error } = await supabase.rpc("admin_set_account_status", {
+      const { error } = await adminSupabase.rpc("admin_set_account_status", {
         _user_id: userId,
         _status: status,
       });
@@ -112,14 +100,6 @@ function AdminApprovals() {
     },
     onError: () => toast.error("That action could not be completed. Admin access is required."),
   });
-
-  if (loading || !isAdmin) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-background">
-        <p className="text-sm text-muted-foreground">Checking your access…</p>
-      </div>
-    );
-  }
 
   const roleOf = (userId: string) =>
     queue.data?.roles.find((r) => r.user_id === userId)?.role ?? "member";

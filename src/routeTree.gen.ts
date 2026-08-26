@@ -31,6 +31,7 @@ import { Route as AdminportalAdminIndexRouteImport } from './routes/_adminportal
 import { Route as AdminportalAdminAiRouteImport } from './routes/_adminportal/admin.ai'
 import { Route as AdminportalAdminAnalyticsRouteImport } from './routes/_adminportal/admin.analytics'
 import { Route as AdminportalAdminApprovalsRouteImport } from './routes/_adminportal/admin.approvals'
+import { Route as AdminportalAdminAttendanceRouteImport } from './routes/_adminportal/admin.attendance'
 import { Route as AdminportalAdminBookingsRouteImport } from './routes/_adminportal/admin.bookings'
 import { Route as AdminportalAdminClassesRouteImport } from './routes/_adminportal/admin.classes'
 import { Route as AdminportalAdminContentRouteImport } from './routes/_adminportal/admin.content'
@@ -161,6 +162,12 @@ const AdminportalAdminApprovalsRoute =
   AdminportalAdminApprovalsRouteImport.update({
     id: '/admin/approvals',
     path: '/admin/approvals',
+    getParentRoute: () => AdminportalRouteRoute,
+  } as any)
+const AdminportalAdminAttendanceRoute =
+  AdminportalAdminAttendanceRouteImport.update({
+    id: '/admin/attendance',
+    path: '/admin/attendance',
     getParentRoute: () => AdminportalRouteRoute,
   } as any)
 const AdminportalAdminBookingsRoute =
@@ -306,6 +313,7 @@ export interface FileRoutesByFullPath {
   '/admin/ai': typeof AdminportalAdminAiRoute
   '/admin/analytics': typeof AdminportalAdminAnalyticsRoute
   '/admin/approvals': typeof AdminportalAdminApprovalsRoute
+  '/admin/attendance': typeof AdminportalAdminAttendanceRoute
   '/admin/bookings': typeof AdminportalAdminBookingsRoute
   '/admin/classes': typeof AdminportalAdminClassesRoute
   '/admin/content': typeof AdminportalAdminContentRoute
@@ -349,6 +357,7 @@ export interface FileRoutesByTo {
   '/admin/ai': typeof AdminportalAdminAiRoute
   '/admin/analytics': typeof AdminportalAdminAnalyticsRoute
   '/admin/approvals': typeof AdminportalAdminApprovalsRoute
+  '/admin/attendance': typeof AdminportalAdminAttendanceRoute
   '/admin/bookings': typeof AdminportalAdminBookingsRoute
   '/admin/classes': typeof AdminportalAdminClassesRoute
   '/admin/content': typeof AdminportalAdminContentRoute
@@ -395,6 +404,7 @@ export interface FileRoutesById {
   '/_adminportal/admin/ai': typeof AdminportalAdminAiRoute
   '/_adminportal/admin/analytics': typeof AdminportalAdminAnalyticsRoute
   '/_adminportal/admin/approvals': typeof AdminportalAdminApprovalsRoute
+  '/_adminportal/admin/attendance': typeof AdminportalAdminAttendanceRoute
   '/_adminportal/admin/bookings': typeof AdminportalAdminBookingsRoute
   '/_adminportal/admin/classes': typeof AdminportalAdminClassesRoute
   '/_adminportal/admin/content': typeof AdminportalAdminContentRoute
@@ -440,6 +450,7 @@ export interface FileRouteTypes {
     | '/admin/ai'
     | '/admin/analytics'
     | '/admin/approvals'
+    | '/admin/attendance'
     | '/admin/bookings'
     | '/admin/classes'
     | '/admin/content'
@@ -483,6 +494,7 @@ export interface FileRouteTypes {
     | '/admin/ai'
     | '/admin/analytics'
     | '/admin/approvals'
+    | '/admin/attendance'
     | '/admin/bookings'
     | '/admin/classes'
     | '/admin/content'
@@ -528,6 +540,7 @@ export interface FileRouteTypes {
     | '/_adminportal/admin/ai'
     | '/_adminportal/admin/analytics'
     | '/_adminportal/admin/approvals'
+    | '/_adminportal/admin/attendance'
     | '/_adminportal/admin/bookings'
     | '/_adminportal/admin/classes'
     | '/_adminportal/admin/content'
@@ -729,6 +742,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminportalAdminApprovalsRouteImport
       parentRoute: typeof AdminportalRouteRoute
     }
+    '/_adminportal/admin/attendance': {
+      id: '/_adminportal/admin/attendance'
+      path: '/admin/attendance'
+      fullPath: '/admin/attendance'
+      preLoaderRoute: typeof AdminportalAdminAttendanceRouteImport
+      parentRoute: typeof AdminportalRouteRoute
+    }
     '/_adminportal/admin/bookings': {
       id: '/_adminportal/admin/bookings'
       path: '/admin/bookings'
@@ -883,6 +903,7 @@ interface AdminportalRouteRouteChildren {
   AdminportalAdminAiRoute: typeof AdminportalAdminAiRoute
   AdminportalAdminAnalyticsRoute: typeof AdminportalAdminAnalyticsRoute
   AdminportalAdminApprovalsRoute: typeof AdminportalAdminApprovalsRoute
+  AdminportalAdminAttendanceRoute: typeof AdminportalAdminAttendanceRoute
   AdminportalAdminBookingsRoute: typeof AdminportalAdminBookingsRoute
   AdminportalAdminClassesRoute: typeof AdminportalAdminClassesRoute
   AdminportalAdminContentRoute: typeof AdminportalAdminContentRoute
@@ -899,6 +920,7 @@ const AdminportalRouteRouteChildren: AdminportalRouteRouteChildren = {
   AdminportalAdminAiRoute: AdminportalAdminAiRoute,
   AdminportalAdminAnalyticsRoute: AdminportalAdminAnalyticsRoute,
   AdminportalAdminApprovalsRoute: AdminportalAdminApprovalsRoute,
+  AdminportalAdminAttendanceRoute: AdminportalAdminAttendanceRoute,
   AdminportalAdminBookingsRoute: AdminportalAdminBookingsRoute,
   AdminportalAdminClassesRoute: AdminportalAdminClassesRoute,
   AdminportalAdminContentRoute: AdminportalAdminContentRoute,

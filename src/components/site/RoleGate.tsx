@@ -26,7 +26,7 @@ export function RoleGate({ role, children }: { role: AppRole; children: ReactNod
       return;
     }
     if (!hasRole(role)) {
-      navigate({ to: hasRole("admin") ? "/admin/approvals" : hasRole("trainer") ? "/trainer" : "/member", replace: true });
+      navigate({ to: hasRole("trainer") ? "/trainer" : "/member", replace: true });
     }
   }, [loading, session, approved, hasRole, role, navigate]);
 

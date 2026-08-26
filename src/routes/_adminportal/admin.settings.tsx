@@ -8,8 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { supabase } from "@/integrations/supabase/client";
-import { siteContentQuery } from "@/lib/gym-data";
+import { adminSupabase } from "@/integrations/supabase/admin-client";
+import { siteContentQuery } from "@/lib/admin-data";
 
 export const Route = createFileRoute("/_adminportal/admin/settings")({
   head: head("Settings", "Gym contact details and general platform settings."),
@@ -42,7 +42,7 @@ function SettingsPage() {
   const save = useMutation({
     mutationFn: async () => {
       const rows = settings.map((s) => ({ key: s.key, label: s.label, value: form[s.key] ?? "" }));
-      const { error } = await supabase.from("site_content").upsert(rows, { onConflict: "key" });
+      const { error } = await adminSupabase.from("site_content").upsert(rows, { onConflict: "key" });
       if (error) throw error;
     },
     onSuccess: async () => {

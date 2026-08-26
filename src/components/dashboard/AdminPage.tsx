@@ -16,7 +16,6 @@ import {
 } from "lucide-react";
 import type { ReactNode } from "react";
 
-import { AdminGate } from "@/components/site/AdminGate";
 import { RoleGate } from "@/components/site/RoleGate";
 import { DashboardShell, type NavItem } from "@/components/dashboard/DashboardShell";
 
@@ -27,6 +26,7 @@ export const adminNav: NavItem[] = [
   { to: "/admin/trainers", label: "Trainers", icon: UserCog },
   { to: "/admin/classes", label: "Classes", icon: CalendarCheck },
   { to: "/admin/bookings", label: "Bookings", icon: ListChecks },
+  { to: "/admin/attendance", label: "Attendance", icon: CalendarCheck },
   { to: "/admin/memberships", label: "Memberships", icon: CreditCard },
   { to: "/admin/equipment", label: "Equipment", icon: Dumbbell },
   { to: "/admin/exercises", label: "Exercises", icon: Activity },
@@ -58,11 +58,9 @@ export function AdminPage({
   children: ReactNode;
 }) {
   return (
-    <AdminGate>
-      <DashboardShell nav={adminNav} area="Admin console" title={title} description={description} actions={actions}>
-        {children}
-      </DashboardShell>
-    </AdminGate>
+    <DashboardShell nav={adminNav} area="Admin console" title={title} description={description} actions={actions} authArea="admin">
+      {children}
+    </DashboardShell>
   );
 }
 
@@ -79,7 +77,7 @@ export function TrainerPage({
 }) {
   return (
     <RoleGate role="trainer">
-      <DashboardShell nav={trainerNav} area="Trainer portal" title={title} description={description} actions={actions}>
+      <DashboardShell nav={trainerNav} area="Trainer portal" title={title} description={description} actions={actions} authArea="public">
         {children}
       </DashboardShell>
     </RoleGate>

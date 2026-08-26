@@ -55,7 +55,7 @@ function AuthPage() {
     }
     setErrors({});
     setSubmitting(true);
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email: parsed.data.email,
       password: parsed.data.password,
     });
@@ -64,8 +64,26 @@ function AuthPage() {
       toast.error("Those details didn't match an account. Check your email and password.");
       return;
     }
+    const userId = data.user?.id;
+    if (!userId) {
+      toast.error("This account could not be verified.");
+      return;
+    }
+    const { data: roles, error: roleError } = await supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", userId);
+    const hasPublicRole =
+      !roleError && (roles ?? []).some((row) => row.role === "member" || row.role === "trainer");
+    if (!hasPublicRole) {
+      await supabase.auth.signOut({ scope: "local" });
+      setSubmitting(false);
+      toast.error("This sign-in is only for members and trainers.");
+      return;
+    }
     await queryClient.invalidateQueries();
-    navigate({ to: "/member", replace: true });
+    const isTrainer = (roles ?? []).some((row) => row.role === "trainer");
+    navigate({ to: isTrainer ? "/trainer" : "/member", replace: true });
   }
 
   return (

@@ -4,7 +4,7 @@ import { AdminPage, head } from "@/components/dashboard/AdminPage";
 import { CrudManager } from "@/components/dashboard/CrudManager";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { announcementsQuery, faqsQuery, siteContentQuery } from "@/lib/gym-data";
+import { announcementsQuery, faqsQuery, siteContentQuery } from "@/lib/admin-data";
 
 export const Route = createFileRoute("/_adminportal/admin/content")({
   head: head("Website content", "Edit homepage copy, FAQs and announcements."),

@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { AdminPage, head } from "@/components/dashboard/AdminPage";
 import { CrudManager } from "@/components/dashboard/CrudManager";
 import { Badge } from "@/components/ui/badge";
-import { allTrainersQuery } from "@/lib/gym-data";
+import { allTrainersQuery } from "@/lib/admin-data";
 
 export const Route = createFileRoute("/_adminportal/admin/trainers")({
   head: head("Trainers", "Manage trainer profiles, specialties and assignments."),

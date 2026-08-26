@@ -29,20 +29,39 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue>({ session: null, loading: true });
 
+async function resolvePublicSession(session: Session | null) {
+  if (!session) return null;
+  const { data: roles, error } = await supabase
+    .from("user_roles")
+    .select("role")
+    .eq("user_id", session.user.id);
+  if (error) return null;
+  const publicRole = (roles ?? []).some((row) => row.role === "member" || row.role === "trainer");
+  return publicRole ? session : null;
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const { data: sub } = supabase.auth.onAuthStateChange((_event, next) => {
-      setSession(next);
+    let active = true;
+    const apply = async (next: Session | null) => {
+      const publicSession = await resolvePublicSession(next);
+      if (!active) return;
+      setSession(publicSession);
       setLoading(false);
+    };
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, next) => {
+      void apply(next);
     });
     supabase.auth.getSession().then(({ data }) => {
-      setSession(data.session);
-      setLoading(false);
+      void apply(data.session);
     });
-    return () => sub.subscription.unsubscribe();
+    return () => {
+      active = false;
+      sub.subscription.unsubscribe();
+    };
   }, []);
 
   return <AuthContext.Provider value={{ session, loading }}>{children}</AuthContext.Provider>;
