@@ -10,7 +10,7 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "14.15"
+    PostgrestVersion: "14.17"
   }
   public: {
     Tables: {
@@ -285,6 +285,8 @@ export type Database = {
       }
       equipment: {
         Row: {
+          benefits: string[]
+          category: string | null
           created_at: string
           description: string | null
           difficulty: string | null
@@ -292,10 +294,13 @@ export type Database = {
           image: string | null
           name: string
           published: boolean
+          recommended_goals: string[]
           target_muscles: string[]
           updated_at: string
         }
         Insert: {
+          benefits?: string[]
+          category?: string | null
           created_at?: string
           description?: string | null
           difficulty?: string | null
@@ -303,10 +308,13 @@ export type Database = {
           image?: string | null
           name: string
           published?: boolean
+          recommended_goals?: string[]
           target_muscles?: string[]
           updated_at?: string
         }
         Update: {
+          benefits?: string[]
+          category?: string | null
           created_at?: string
           description?: string | null
           difficulty?: string | null
@@ -314,6 +322,7 @@ export type Database = {
           image?: string | null
           name?: string
           published?: boolean
+          recommended_goals?: string[]
           target_muscles?: string[]
           updated_at?: string
         }
@@ -321,41 +330,50 @@ export type Database = {
       }
       exercises: {
         Row: {
+          category: string | null
           created_at: string
           description: string | null
           difficulty: string | null
           equipment_id: string | null
+          equipment_name: string | null
           id: string
           image: string | null
           instructions: string | null
           name: string
           published: boolean
+          recommended_reps: string | null
           target_muscles: string[]
           updated_at: string
         }
         Insert: {
+          category?: string | null
           created_at?: string
           description?: string | null
           difficulty?: string | null
           equipment_id?: string | null
+          equipment_name?: string | null
           id?: string
           image?: string | null
           instructions?: string | null
           name: string
           published?: boolean
+          recommended_reps?: string | null
           target_muscles?: string[]
           updated_at?: string
         }
         Update: {
+          category?: string | null
           created_at?: string
           description?: string | null
           difficulty?: string | null
           equipment_id?: string | null
+          equipment_name?: string | null
           id?: string
           image?: string | null
           instructions?: string | null
           name?: string
           published?: boolean
+          recommended_reps?: string | null
           target_muscles?: string[]
           updated_at?: string
         }
@@ -396,6 +414,57 @@ export type Database = {
           question?: string
           sort_order?: number
           updated_at?: string
+        }
+        Relationships: []
+      }
+      fitness_profiles: {
+        Row: {
+          age: number | null
+          body_focus_areas: string[]
+          completed: boolean
+          completed_at: string | null
+          created_at: string
+          equipment_preferences: string[]
+          fitness_level: string
+          goals: string[]
+          height_cm: number | null
+          id: string
+          updated_at: string
+          user_id: string
+          weight_kg: number | null
+          workout_preferences: string[]
+        }
+        Insert: {
+          age?: number | null
+          body_focus_areas?: string[]
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          equipment_preferences?: string[]
+          fitness_level?: string
+          goals?: string[]
+          height_cm?: number | null
+          id?: string
+          updated_at?: string
+          user_id: string
+          weight_kg?: number | null
+          workout_preferences?: string[]
+        }
+        Update: {
+          age?: number | null
+          body_focus_areas?: string[]
+          completed?: boolean
+          completed_at?: string | null
+          created_at?: string
+          equipment_preferences?: string[]
+          fitness_level?: string
+          goals?: string[]
+          height_cm?: number | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+          weight_kg?: number | null
+          workout_preferences?: string[]
         }
         Relationships: []
       }
@@ -552,6 +621,39 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      progress_entries: {
+        Row: {
+          created_at: string
+          id: string
+          notes: string | null
+          recorded_on: string
+          updated_at: string
+          user_id: string
+          weight_kg: number | null
+          workouts_completed: number
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          recorded_on?: string
+          updated_at?: string
+          user_id: string
+          weight_kg?: number | null
+          workouts_completed?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          recorded_on?: string
+          updated_at?: string
+          user_id?: string
+          weight_kg?: number | null
+          workouts_completed?: number
+        }
+        Relationships: []
       }
       site_content: {
         Row: {
@@ -733,6 +835,7 @@ export type Database = {
       workout_plan_items: {
         Row: {
           created_at: string
+          day_of_week: string | null
           duration: string | null
           equipment: string | null
           exercise_id: string | null
@@ -746,6 +849,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          day_of_week?: string | null
           duration?: string | null
           equipment?: string | null
           exercise_id?: string | null
@@ -759,6 +863,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          day_of_week?: string | null
           duration?: string | null
           equipment?: string | null
           exercise_id?: string | null
@@ -794,8 +899,9 @@ export type Database = {
           id: string
           member_id: string
           notes: string | null
+          source: string
           title: string
-          trainer_id: string
+          trainer_id: string | null
           updated_at: string
         }
         Insert: {
@@ -804,8 +910,9 @@ export type Database = {
           id?: string
           member_id: string
           notes?: string | null
+          source?: string
           title: string
-          trainer_id: string
+          trainer_id?: string | null
           updated_at?: string
         }
         Update: {
@@ -814,8 +921,9 @@ export type Database = {
           id?: string
           member_id?: string
           notes?: string | null
+          source?: string
           title?: string
-          trainer_id?: string
+          trainer_id?: string | null
           updated_at?: string
         }
         Relationships: []

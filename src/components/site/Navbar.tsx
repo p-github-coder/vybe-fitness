@@ -23,6 +23,8 @@ const links = [
   { to: "/membership", label: "Membership" },
   { to: "/trainers", label: "Trainers" },
   { to: "/classes", label: "Classes" },
+  { to: "/equipment", label: "Equipment" },
+  { to: "/exercises", label: "Exercises" },
   { to: "/contact", label: "Contact" },
 ] as const;
 
@@ -30,6 +32,9 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { session, profile, hasRole } = useAccount();
+  // The admin portal has its own isolated context: an administrator signed into
+  // /admin is treated as a guest on the public marketing site.
+  const publicSession = session && !hasRole("admin") ? session : null;
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -47,11 +52,7 @@ export function Navbar() {
     navigate({ to: "/auth", replace: true });
   }
 
-  const homeFor = hasRole("admin")
-    ? "/admin/approvals"
-    : hasRole("trainer")
-      ? "/trainer"
-      : "/member";
+  const homeFor = hasRole("trainer") ? "/trainer" : "/member";
 
   return (
     <header
@@ -80,7 +81,7 @@ export function Navbar() {
             ))}
           </nav>
 
-          {session ? (
+          {publicSession ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="secondary" size="sm" className="gap-2">
